@@ -32,7 +32,7 @@ export default {
     }
   },
   created() {
-    load();
+    this.load();
   },
   methods: {
     load() {
@@ -42,7 +42,8 @@ export default {
           pageSize: 10
         }
       }).then(res =>{
-        this.tableData = res.data;
+        console.log(res);
+        this.tableData = res.list;
       })
     }
   }
