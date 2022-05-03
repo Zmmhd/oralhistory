@@ -7,6 +7,7 @@ import com.example.oralhistory.mapper.NoticeMapper;
 import com.example.oralhistory.utils.PageUtils;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,13 @@ import java.util.List;
  * @author Zmm
  * @since 2022-05-02
  */
-@RequiredArgsConstructor
+
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
-    private final NoticeMapper noticeMapper;
+
+    @Autowired
+    private NoticeMapper noticeMapper;
 
     @PostMapping("/add")
     public ResponseEntity addNotice(@RequestParam Notice notice) {

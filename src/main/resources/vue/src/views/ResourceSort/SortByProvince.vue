@@ -32,11 +32,16 @@ export default {
     }
   },
   created() {
-    // load();
+    load();
   },
   methods: {
     load() {
-      request.get("/get").then(res =>{
+      request.get("/resource/get",{
+        params: {
+          pageNum: 5,
+          pageSize: 10
+        }
+      }).then(res =>{
         this.tableData = res.data;
       })
     }
