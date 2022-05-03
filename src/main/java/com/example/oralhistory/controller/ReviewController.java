@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.oralhistory.entity.RespondResult;
 import com.example.oralhistory.entity.Review;
 import com.example.oralhistory.mapper.ReviewMapper;
+import com.example.oralhistory.utils.PageUtils;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ public class ReviewController {
     private final ReviewMapper reviewMapper;
 
     @PostMapping("/add")
-    public ResponseEntity addReview(@RequestBody Review review) {
+    public ResponseEntity addReview(@RequestParam Review review) {
         try {
             int insert = reviewMapper.insert(review);
             if (insert == 0) {
@@ -38,11 +40,13 @@ public class ReviewController {
     }
 
     @GetMapping("/getbystatus/{status}")
-    public ResponseEntity getByStatus(@PathVariable Integer status) {
+    public ResponseEntity getByStatus(@PathVariable Integer status,
+                                      @RequestParam int pageNum,
+                                      @RequestParam int pageSize) {
         try {
             if (status == -1 || status == 0 || status == 1) {
                 List<Review> reviews = reviewMapper.selectList(new QueryWrapper<Review>().eq("status", status));
-                return RespondResult.success(reviews);
+                return RespondResult.success(PageUtils.pageInfo(reviews,pageNum,pageSize));
             }
             return RespondResult.error("状态位错误",400);
         } catch (Exception e) {
@@ -52,10 +56,13 @@ public class ReviewController {
     }
 
     @GetMapping("/titlelike/{title}")
-    public ResponseEntity likeTitle(@PathVariable String title) {
+    public ResponseEntity likeTitle(@PathVariable String title,
+                                    @RequestParam int pageNum,
+                                    @RequestParam int pageSize) {
         try {
             List<Review> reviews = reviewMapper.selectList(new QueryWrapper<Review>().like("title", title));
-            return RespondResult.success(reviews);
+
+            return RespondResult.success(PageUtils.pageInfo(reviews,pageNum,pageSize));
         } catch (Exception e) {
             e.printStackTrace();
             return RespondResult.error("失败", 500);
@@ -63,10 +70,12 @@ public class ReviewController {
     }
 
     @GetMapping("/upernumberlike/{upernumber}")
-    public ResponseEntity likeUpnumber(@PathVariable String upernumber) {
+    public ResponseEntity likeUpnumber(@PathVariable String upernumber,
+                                       @RequestParam int pageNum,
+                                       @RequestParam int pageSize) {
         try {
             List<Review> reviews = reviewMapper.selectList(new QueryWrapper<Review>().like("upernumber", upernumber));
-            return RespondResult.success(reviews);
+            return RespondResult.success(PageUtils.pageInfo(reviews,pageNum,pageSize));
         } catch (Exception e) {
             e.printStackTrace();
             return RespondResult.error("失败", 500);
@@ -75,12 +84,12 @@ public class ReviewController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity update(@PathVariable Integer id,
-                                 @RequestBody Review review) {
+                                 @RequestParam Review review) {
 
         try {
             Review review1 = reviewMapper.selectById(id);
             if (review1 == null) {
-                return RespondResult.error("没有这条公告", 400);
+                return RespondResult.error("没有这条记录", 400);
             }
             reviewMapper.updateById(review);
             return RespondResult.success("成功");

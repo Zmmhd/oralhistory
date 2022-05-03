@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.oralhistory.entity.Resource;
 import com.example.oralhistory.entity.RespondResult;
 import com.example.oralhistory.mapper.ResourceMapper;
+import com.example.oralhistory.utils.PageUtils;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +29,11 @@ public class ResourceController {
      * @return
      */
     @GetMapping("/get")
-    public ResponseEntity getAll(){
+    public ResponseEntity getAll(@RequestParam int pageNum,
+                                 @RequestParam int pageSize){
         try {
             List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().eq("status",1));
-            return RespondResult.success(resources);
+            return RespondResult.success(PageUtils.pageInfo(resources,pageNum,pageSize));
         }catch (Exception e){
             e.printStackTrace();
             return RespondResult.error("失败",400);
@@ -45,7 +48,9 @@ public class ResourceController {
     public  ResponseEntity query(@RequestParam String title,
                                  @RequestParam Integer type,
                                  @RequestParam String province,
-                                 @RequestParam String theme){
+                                 @RequestParam String theme,
+                                 @RequestParam int pageNum,
+                                 @RequestParam int pageSize){
         try {
             QueryWrapper<Resource> queryWrapper = new QueryWrapper<>();
             if (type == 1 || type == 2 || type == 3) {
@@ -62,7 +67,7 @@ public class ResourceController {
             }
             queryWrapper.eq("status",1);
             List<Resource> resources = resourceMapper.selectList(queryWrapper);
-            return RespondResult.success(resources);
+            return RespondResult.success(PageUtils.pageInfo(resources,pageNum,pageSize));
         }catch (Exception e){
             e.printStackTrace();
             return RespondResult.error("失败",500);
