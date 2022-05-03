@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.example.oralhistory.mapper")
+@MapperScan(value = "com.example.oralhistory.mapper")
 public class OralhistoryApplication {
 
     public static void main(String[] args) {

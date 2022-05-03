@@ -16,7 +16,7 @@ import java.util.List;
  * @author Zmm
  * @since 2022-05-02
  */
-
+@Mapper
 @Repository
 public interface NoticeMapper extends BaseMapper<Notice> {
 }

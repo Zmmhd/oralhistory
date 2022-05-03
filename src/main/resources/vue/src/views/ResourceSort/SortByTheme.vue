@@ -32,7 +32,7 @@ export default {
     }
   },
   created() {
-    // load();
+    load();
   },
   methods: {
     load() {

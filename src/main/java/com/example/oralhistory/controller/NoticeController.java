@@ -17,13 +17,11 @@ import java.util.List;
  * @author Zmm
  * @since 2022-05-02
  */
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/notice")
 public class NoticeController {
-
-    @Autowired
-    private NoticeMapper noticeMapper;
+    private final NoticeMapper noticeMapper;
 
     @PostMapping("/add")
     public ResponseEntity addNotice(@RequestParam Notice notice) {
