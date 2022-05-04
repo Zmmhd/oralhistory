@@ -13,7 +13,7 @@
             <el-icon>
               <timer/>
             </el-icon>
-            <span style="margin-left: 10px">{{ scope.row.time }}</span>
+            <span style="margin-left: 10px">{{ scope.row.uptime }}</span>
           </div>
         </template>
       </el-table-column>
@@ -45,6 +45,7 @@
 
 <script>
 import {Timer} from '@element-plus/icons-vue'
+import request from "@/utils/request";
 
 export default {
   name: "RaiseNotice",
@@ -73,7 +74,16 @@ export default {
   },
   methods: {
     load() {
-
+      request.get("/notice/getbytype/" + 1, {
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        }
+      }).then(res => {
+        console.log(res);
+        this.tableData = res.list;
+        this.total = res.total;
+      })
     },
     handleSizeChange(pageSize) {
       this.pageSize = pageSize
