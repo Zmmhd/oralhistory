@@ -1,14 +1,37 @@
 <template>
   <div style="margin: 10px;">
-    <el-input v-model="province" placeholder="请输入主题曲" style="width: 30%;" clearable/>
+    <el-input v-model="theme" placeholder="请输入主题曲" style="width: 30%;" clearable/>
     <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="title" label="标题"/>
-      <el-table-column prop="type" label="类型"/>
-      <el-table-column prop="province" label="省份"/>
-      <el-table-column prop="theme" label="主题曲"/>
+      <el-table-column label="类型">
+        <template #default="scope">
+          <el-tag>{{ scope.row.type }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="省份">
+        <template #default="scope">
+          <el-tag type="success">{{ scope.row.province }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="主题曲" sortable>
+        <template #default="scope">
+          <el-tag type="warning">{{ scope.row.theme }}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="synopsis" label="简介"/>
     </el-table>
+
+    <el-pagination
+        style="margin-top: 10px; margin-left: 50px;"
+        :currentPage="pageNum"
+        :page-size="pageSize"
+        :page-sizes="[5, 10, 20]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+    />
   </div>
 </template>
 
@@ -19,27 +42,37 @@ export default {
   name: "SortByTheme",
   data() {
     return {
-      tableData: [
-        {
-          title: "我是标题",
-          type: "类型",
-          province: "上海",
-          theme: "抗疫",
-          synopsis: "一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十"
-        }
-      ],
-      province: ""
+      tableData: [],
+      theme: "",
+      pageNum: 1,
+      pageSize: 10,
+      total: 0
     }
   },
   created() {
-    // load();
+    this.load();
   },
   methods: {
     load() {
-      request.get("/get").then(res =>{
-        this.tableData = res.data;
+      request.get("/resource/get",{
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        }
+      }).then(res =>{
+        console.log(res);
+        this.tableData = res.list;
+        this.total = res.total;
       })
-    }
+    },
+    handleSizeChange(pageSize) {
+      this.pageSize = pageSize
+      this.load()
+    },
+    handleCurrentChange(pageNum) {
+      this.pageNum = pageNum
+      this.load()
+    },
   }
 }
 </script>
