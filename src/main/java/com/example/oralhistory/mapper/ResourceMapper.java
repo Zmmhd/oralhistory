@@ -1,5 +1,6 @@
 package com.example.oralhistory.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.oralhistory.entity.Resource;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,7 +21,5 @@ import java.util.List;
 @Mapper
 @Repository
 public interface ResourceMapper extends BaseMapper<Resource> {
-    @Select("select * from tb_resource where status = 1 and type = #{type}")
-    List<Resource> getListByType(Integer type);
 
 }
