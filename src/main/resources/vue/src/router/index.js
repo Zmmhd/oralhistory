@@ -15,6 +15,11 @@ import OralMap from "@/views/OralMap";
 import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit";
 import Submit from "@/views/OnlineSubmit/Submit";
 import Review from "@/views/OnlineSubmit/Review";
+import AdminHomeView from "@/views/Administrator/AdminHomeView";
+import ManageNotice from "@/views/Administrator/ManageNotice";
+import ManageResource from "@/views/Administrator/ManageResource";
+import ManageRaiseNotice from "@/views/Administrator/ManageRaiseNotice";
+import ManageMomentsNotice from "@/views/Administrator/ManageMomentsNotice";
 
 const routes = [
   {
@@ -103,6 +108,36 @@ const routes = [
         path: '/about',
         name: 'About',
         component: About,
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    name: 'AdminHomeView',
+    component: AdminHomeView,
+    redirect: '/manageResource',
+    children: [
+      {
+        path: '/manageResource',
+        name: 'ManageResource',
+        component: ManageResource,
+      },
+      {
+        path: '/manageNotice',
+        name: 'ManageNotice',
+        component: ManageNotice,
+        children: [
+          {
+            path: '/manageRaiseNotice',
+            name: 'ManageRaiseNotice',
+            component: ManageRaiseNotice,
+          },
+          {
+            path: '/manageMomentsNotice',
+            name: 'ManageMomentsNotice',
+            component: ManageMomentsNotice,
+          }
+        ]
       }
     ]
   }

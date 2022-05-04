@@ -1,5 +1,8 @@
 <template>
   <div style="margin: 10px;">
+    <div style="margin-bottom: 10px;">
+      <el-button type="info" @click="add">新增公告</el-button>
+    </div>
 
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="title" label="标题"/>
@@ -12,6 +15,17 @@
             </el-icon>
             <span style="margin-left: 10px">{{ scope.row.uptime }}</span>
           </div>
+        </template>
+      </el-table-column>
+
+      <el-table-column fixed="right" label="操作" width="120">
+        <template #default="scope">
+          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-popconfirm title="确定删除此公告吗？" @confirm="handleDelete(scope.row)">
+            <template #reference>
+              <el-button type="text" size="small">删除</el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -34,7 +48,7 @@ import {Timer} from '@element-plus/icons-vue'
 import request from "@/utils/request";
 
 export default {
-  name: "RaiseNotice",
+  name: "ManageRaiseNotice",
   components: {
     Timer
   },
@@ -70,6 +84,15 @@ export default {
       this.pageNum = pageNum
       this.load()
     },
+    handleEdit(row) {
+
+    },
+    handleDelete(row) {
+
+    },
+    add() {
+
+    }
   }
 }
 </script>
