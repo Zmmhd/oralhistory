@@ -7,6 +7,10 @@ import com.example.oralhistory.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 /**
  * @author Zmm
@@ -19,18 +23,6 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    /**
-     * 增加一条审核,要同时增加一条resource记录
-     * （后面可能还要添加一个文件流）
-     * @param review 审核对象
-     * @param resource 一条resource记录
-     * @return 响应
-     */
-    @PostMapping("/add")
-    public ResponseEntity addReview(@RequestParam Review review,
-                                    @RequestParam Resource resource) {
-        return reviewService.addReview(review,resource);
-    }
 
     /**
      * 通过状态查询审核
@@ -78,14 +70,41 @@ public class ReviewController {
     /**
      * 修改审核，即选择通过或者不通过,
      * 修改实体review的status.1为通过；-1为不通过
-     * @param id 审核id
+     * @param id 审核的id
      * @param status 审核建议 1为通过；-1为不通过
      * @return
      */
     @PutMapping("/update/{id}")
     public ResponseEntity update(@PathVariable Integer id,
-                                 @RequestParam int status) {
-        return reviewService.update(id, status);
+                                 @RequestParam int status,
+                                 HttpServletRequest request) {
+        if(status == 1){
+            return reviewService.passReview(id);
+        }else if(status == -1){
+            return  reviewService.failReview(id,request);
+        }
+        return RespondResult.error("失败",400);
+
+    }
+
+    /**
+     * 上传文件与新建一个审核和资源
+     * 注意传过来的两个实体要满足下列条件
+     * @param multipartFile 用户上传的文件
+     * @param resource 不需要字段id、status、uptime、url、
+     * @param review 不需要的字段id、status、uptime、resourceid、
+     * @return
+     */
+    @PostMapping(value = "/upload",produces = "application/json;charset=utf-8")
+    public ResponseEntity upload(@RequestParam MultipartFile multipartFile,
+                                 @RequestParam Resource resource,
+                                 @RequestParam Review review,
+                                 HttpServletRequest request){
+        resource.setStatus(0);
+        review.setStatus(0);
+        resource.setUptime(LocalDate.now());
+        resource.setUptime(LocalDate.now());
+        return reviewService.uploadFile(multipartFile, review, resource,request);
     }
 
 

@@ -7,12 +7,15 @@ import com.example.oralhistory.entity.RespondResult;
 import com.example.oralhistory.entity.Review;
 import com.example.oralhistory.mapper.ResourceMapper;
 import com.example.oralhistory.mapper.ReviewMapper;
+import com.example.oralhistory.utils.FileUtils;
 import com.example.oralhistory.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,20 +32,6 @@ public class ReviewService {
     @Autowired
     ResourceMapper resourceMapper;
 
-    /**
-     * 增加一个审核
-     *
-     * @param review
-     * @return
-     */
-    @Transactional
-    public ResponseEntity addReview(Review review, Resource resource) {
-        review.setStatus(0);
-        resource.setStatus(0);
-        reviewMapper.insert(review);
-        resourceMapper.insert(resource);
-        return RespondResult.success("成功");
-    }
 
     public ResponseEntity getByStatus(Integer status, int pageNum, int pageSize) {
         try {
@@ -78,17 +67,84 @@ public class ReviewService {
         }
     }
 
+    /**
+     * 通过审核，修改为审核通过状态
+     * @param id 审核id号
+     * @return 响应
+     */
     @Transactional
-    public ResponseEntity update(Integer id, int status) {
-        Review review1 = reviewMapper.selectById(id);
-        if (review1 == null) {
+    public ResponseEntity passReview(Integer id) {
+        Review review = reviewMapper.selectById(id);
+        if (review == null) {
             return RespondResult.error("没有这条记录", 400);
         }
         // 修改review表中status
-        reviewMapper.update(new Review(), new UpdateWrapper<Review>().eq("id", id).set("status", status));
-        Review review = reviewMapper.selectById(id);
+        reviewMapper.update(new Review(), new UpdateWrapper<Review>().eq("id", id).set("status", 1));
         // 修改resource表中数据
-        resourceMapper.update(new Resource(), new UpdateWrapper<Resource>().eq("id", review.getResourceid()).set("status", status));
+        resourceMapper.update(new Resource(), new UpdateWrapper<Resource>().eq("id", review.getResourceid()).set("status", 1));
+        return RespondResult.success("成功");
+    }
+
+    /**
+     * 没通过的审核
+     *
+     * @param id 审核id
+     * @return 响应
+     */
+    @Transactional
+    public ResponseEntity failReview(Integer id, HttpServletRequest request) {
+        Review review = reviewMapper.selectById(id);
+        if (review == null) {
+            return RespondResult.error("没有这条记录", 400);
+        }
+        // 修改review表中status
+        reviewMapper.update(new Review(), new UpdateWrapper<Review>().eq("id", id).set("status", -1));
+
+        // 删除url对应的文件
+        Resource resource = resourceMapper.selectById(review.getResourceid());
+        try {
+            String path = request.getSession().getServletContext().getRealPath("/uploadFile/") + FileUtils.getType(resource.getType());
+            FileUtils.deleteFile(resource.getUrl(), path);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return RespondResult.error("删除文件失败", 400);
+        }
+        // 删除当前resource
+        resourceMapper.deleteById(review.getResourceid());
+
+        return RespondResult.success("成功");
+    }
+
+    /**
+     * @param file
+     * @param review
+     * @param resource
+     * @return
+     */
+    @Transactional
+    public ResponseEntity uploadFile(MultipartFile file, Review review,
+                                     Resource resource,
+                                     HttpServletRequest request) {
+
+        //设置文件上传保存文件路径：保存在项目运行目录下的uploadFile文件夹
+        String savepath = request.getSession().getServletContext().getRealPath("/uploadFile/") + FileUtils.getType(resource.getType());
+        String newname = null;
+        try {
+            newname = FileUtils.saveFile(savepath, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return RespondResult.error("失败", 400);
+        }
+
+        // 修改resource的url并且插入数据库中
+        resource.setUrl(newname);
+        resourceMapper.insert(resource);
+
+        // 获得resource的id
+        review.setResourceid(resourceMapper.selectOne(new QueryWrapper<Resource>().eq("url", resource.getUrl())).getId());
+
+        //插入review
+        reviewMapper.insert(review);
         return RespondResult.success("成功");
     }
 
