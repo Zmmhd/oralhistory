@@ -1,5 +1,5 @@
 <template>
-  <el-menu router style="width: 200px; min-height: 100vh;" default-active="/raiseNotice">
+  <el-menu router style="width: 200px; min-height: 100vh; font-weight: 700" default-active="/raiseNotice">
     <el-menu-item index="/raiseNotice">
       <el-icon>
         <IceCream/>

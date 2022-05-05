@@ -1,6 +1,6 @@
 <template>
   <div id="time">
-    <div style="margin-left: 20px; width: 80%;">
+    <div style="margin-left: 20px; width: 80%; user-select: none; font-weight: 700;">
       {{ time }}
     </div>
     <div style="flex: 1;">

@@ -1,6 +1,6 @@
 <template>
   <div id="time">
-    <div style="margin-left: 20px; width: 80%;">
+    <div style="margin-left: 20px; width: 80%; user-select: none; font-weight: 700;">
       {{ time }}
     </div>
     <div style="flex: 1;">
@@ -18,6 +18,7 @@
              background-color="#545c64"
              text-color="#fff"
              active-text-color="#ffd04b"
+             style="font-weight: 900;"
     >
       <el-menu-item index="/mainPage">主页</el-menu-item>
       <el-sub-menu index="/resourceSort">
@@ -114,6 +115,8 @@ export default {
   line-height: 50px;
   color: #DCDCDC;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*#title {*/

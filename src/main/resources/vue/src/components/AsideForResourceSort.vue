@@ -1,5 +1,5 @@
 <template>
-  <el-menu router style="width: 200px; min-height: 100vh;" default-active="/sortByType">
+  <el-menu router style="width: 200px; min-height: 100vh; font-weight: 700" default-active="/sortByType">
     <el-menu-item index="/sortByType">
       <el-icon>
         <Lollipop/>
