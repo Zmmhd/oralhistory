@@ -95,10 +95,12 @@ public class ResourceController {
             }
             List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().select("Distinct " + target));
             List<String> targets = new ArrayList<>();
+
             for (Resource resource : resources) {
-                targets.add("province".equals(target)?resource.getProvince():resource.getTheme());
+                targets.add("province".equals(target) ? resource.getProvince() : resource.getTheme());
             }
-            return RespondResult.success(target);
+
+            return RespondResult.success(targets);
         } catch (Exception e) {
             e.printStackTrace();
             return RespondResult.error("失败", 500);

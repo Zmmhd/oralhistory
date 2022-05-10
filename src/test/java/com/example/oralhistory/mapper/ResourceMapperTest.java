@@ -34,5 +34,6 @@ class ResourceMapperTest {
             province.add(resource.getProvince());
         }
         province.forEach(System.out::println);
+
     }
 }
