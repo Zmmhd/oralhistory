@@ -1,7 +1,13 @@
 <template>
   <div style="margin: 10px;">
-    <el-input v-model="title" placeholder="请输入关键字" style="width: 30%;" clearable/>
-    <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
+    <div>
+      <el-input v-model="title" placeholder="请输入关键字" style="width: 30%;" clearable/>
+      <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
+    </div>
+    <div>
+      <el-tag style="cursor: pointer;" type="success" @click="this.province = ''; load();">全部</el-tag>
+      <el-tag style="margin: 5px; cursor: pointer;" v-for="p in allProvince" type="success" @click="this.province = p; load();">{{ p }}</el-tag>
+    </div>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="title" label="标题"/>
       <el-table-column label="类型">
@@ -47,7 +53,8 @@ export default {
       pageNum: 1,
       pageSize: 10,
       total: 0,
-      title: ""
+      title: "",
+      allProvince: ["y","d","s","q"]
     }
   },
   created() {
@@ -59,7 +66,7 @@ export default {
         params: {
           title: this.title,
           type: 0,
-          province: "",
+          province: this.province,
           theme: "",
           pageNum: this.pageNum,
           pageSize: this.pageSize
@@ -68,6 +75,8 @@ export default {
         console.log(res);
         this.tableData = res.list;
         this.total = res.total;
+        this.pageNum = res.pageNum;
+        this.pageSize = res.pageSize;
       })
     },
     handleSizeChange(pageSize) {

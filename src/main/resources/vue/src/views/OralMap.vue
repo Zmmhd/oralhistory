@@ -1,10 +1,10 @@
 <template>
-口述地图
+  口述地图
 </template>
 
 <script>
 export default {
-  name: "OralMap"
+  name: "OralMap",
 }
 </script>
 

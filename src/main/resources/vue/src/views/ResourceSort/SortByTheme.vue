@@ -1,6 +1,6 @@
 <template>
   <div style="margin: 10px;">
-    <el-input v-model="theme" placeholder="请输入主题曲" style="width: 30%;" clearable/>
+    <el-input v-model="title" placeholder="请输入关键字" style="width: 30%;" clearable/>
     <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="title" label="标题"/>
@@ -56,6 +56,10 @@ export default {
     load() {
       request.get("/resource/get",{
         params: {
+          title: this.title,
+          type: 0,
+          province: "",
+          theme: "",
           pageNum: this.pageNum,
           pageSize: this.pageSize
         }
@@ -63,6 +67,8 @@ export default {
         console.log(res);
         this.tableData = res.list;
         this.total = res.total;
+        this.pageNum = res.pageNum;
+        this.pageSize = res.pageSize;
       })
     },
     handleSizeChange(pageSize) {

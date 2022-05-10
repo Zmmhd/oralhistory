@@ -1,5 +1,5 @@
 <template>
-  <el-menu router style="width: 200px; min-height: 100vh; font-weight: 700" default-active="/submit">
+  <el-menu router class="menu" text-color="#fff" active-text-color="#f05053"  default-active="/submit">
     <el-menu-item index="/submit">
       <el-icon>
         <Coffee/>
@@ -27,5 +27,13 @@ export default {
 </script>
 
 <style scoped>
-
+.menu{
+  width: 200px;
+  min-height: 100vh;
+  background-color: #e7ac94;
+  font-weight: 700;
+}
+.el-menu-item:hover {
+  background-color: #d1806c !important;
+}
 </style>

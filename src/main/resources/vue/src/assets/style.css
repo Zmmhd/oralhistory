@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+
+    /*
+        怪异盒模型：元素的总高度和宽度包含内边距(padding)和边框(border)
+    */
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+    /*
+        min-height设置最低高度;
+        vh是相对于视口的高度，一个视口被分为100个vh
+    */
+    min-height: 100vh;
+    /* 弹性盒子 */
+    display: flex;
+    /* justify-contents用于设置弹性盒子元素在主轴（横轴）方向上的对齐方式 */
+    justify-content: center;
+    /* justify-contents用于设置弹性盒子元素在侧轴（纵轴）方向上的对齐方式 */
+    align-items: center;
+    /* 弹性盒子中元素排列方向，默认为row */
+    flex-direction: column;
+}
+
+.card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 
+        flex-wrap规定弹性盒子是否拆行或拆列，
+        属性值为wrap规定弹性盒子内的元素需要在必要时拆行或拆列
+     */
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    max-width: 325px;
+    width: 325px;
+    height: auto;
+    margin: 25px;
+    box-shadow: 0 5px 25px rgb(1 1 5);
+    border-radius: 10px;
+    /* 超出盒子的部分遮起来 */
+    overflow: hidden;
+}
+
+.card-image {
+    max-height: 200px;
+}
+
+.card-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card-info {
+    position: relative;
+    color: #222;
+    padding: 10px 20px 20px;
+}
+
+.card-info h3 {
+    /* 
+        em是当前元素相对于父元素字体大小而言的，
+        如果父元素没有设置字体大小的话，就是相对于浏览器默认的字体大小而言的。
+     */
+    font-size: 1.8em;
+    /* 字体粗细 */
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.card-info p {
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.pagination {
+    text-align: center;
+    margin: 30px 30px 60px;
+    /* 禁止用户选中文本 */
+    user-select: none;
+}
+
+.pagination li {
+    /* 使元素排成一列 */
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 0 5px 25px rgb(1 1 10);
+}
+
+.pagination li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    line-height: 45px;
+}
+
+.previous-page, .next-page {
+    background: #0AB1CE;
+    width: 80px;
+    border-radius: 45px;
+    cursor: pointer;
+    /* ease指“快启动，慢停止” */
+    transition: 0.3s ease;
+}
+
+.previous-page:hover {
+    transform: translateX(-5px);
+}
+
+.next-page:hover {
+    transform: translateX(5px);
+}
+
+.current-page, .dots {
+    background: #ccc;
+    width: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.active {
+    background: #0AB1CE;
+}
+
+.disable {
+    background-color: #ccc;
+}
