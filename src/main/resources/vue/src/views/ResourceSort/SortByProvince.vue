@@ -10,7 +10,7 @@
         {{ p }}
       </el-tag>
     </div>
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="tableData" style="width: 100%" @row-click="rowClick">
       <el-table-column prop="title" label="标题"/>
       <el-table-column label="类型">
         <template #default="scope">
@@ -108,6 +108,19 @@ export default {
     changeProvince(p) {
       this.province = p;
       this.load();
+    },
+    rowClick(row, event, column) {
+      console.log(row, event, column);
+      // 以下内容需要往下一个路由传
+      sessionStorage.setItem("currentResource", row); // 当前资源
+      sessionStorage.setItem("currentSort", "/sortByProvince"); // 当前路由
+      if (row.type === "文章") {
+        this.$router.push("/articleResource");
+      } else if (row.type === "视频") {
+        this.$router.push("/videoResource");
+      } else if (row.type === "音频") {
+        this.$router.push("/audioResource");
+      }
     }
   }
 }

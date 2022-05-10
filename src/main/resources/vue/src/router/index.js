@@ -23,6 +23,9 @@ import KnowledgePicture from "@/views/KnowledgePicture/KnowledgePicture";
 import ThemeRelative from "@/views/KnowledgePicture/ThemeRelative";
 import WechatTypeRelative from "@/views/KnowledgePicture/WechatTypeRelative";
 import WebsiteTypeRelative from "@/views/KnowledgePicture/WebsiteTypeRelative";
+import VideoResource from "@/views/ResourceSort/VideoResource";
+import AudioResource from "@/views/ResourceSort/AudioResource";
+import ArticleResource from "@/views/ResourceSort/ArticleResource";
 
 const routes = [
   {
@@ -55,6 +58,21 @@ const routes = [
             path: '/sortByType',
             name: 'SortByType',
             component: SortByType,
+          },
+          {
+            path: '/videoResource',
+            name: 'VideoResource',
+            component: VideoResource,
+          },
+          {
+            path: '/audioResource',
+            name: 'AudioResource',
+            component: AudioResource,
+          },
+          {
+            path: '/articleResource',
+            name: 'ArticleResource',
+            component: ArticleResource,
           }
         ]
       },
