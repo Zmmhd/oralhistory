@@ -10,7 +10,6 @@ import MomentsNotice from "@/views/Notice/MomentsNotice";
 import RaiseNotice from "@/views/Notice/RaiseNotice";
 import About from "@/views/About";
 import Principle from "@/views/Principle";
-import KnowledgePicture from "@/views/KnowledgePicture";
 import OralMap from "@/views/OralMap";
 import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit";
 import Submit from "@/views/OnlineSubmit/Submit";
@@ -20,6 +19,10 @@ import ManageNotice from "@/views/Administrator/ManageNotice";
 import ManageResource from "@/views/Administrator/ManageResource";
 import ManageRaiseNotice from "@/views/Administrator/ManageRaiseNotice";
 import ManageMomentsNotice from "@/views/Administrator/ManageMomentsNotice";
+import KnowledgePicture from "@/views/KnowledgePicture/KnowledgePicture";
+import ThemeRelative from "@/views/KnowledgePicture/ThemeRelative";
+import WechatTypeRelative from "@/views/KnowledgePicture/WechatTypeRelative";
+import WebsiteTypeRelative from "@/views/KnowledgePicture/WebsiteTypeRelative";
 
 const routes = [
   {
@@ -81,6 +84,23 @@ const routes = [
         path: '/knowledgePicture',
         name: 'KnowledgePicture',
         component: KnowledgePicture,
+        children: [
+          {
+            path: '/themeRelative',
+            name: 'ThemeRelative',
+            component: ThemeRelative,
+          },
+          {
+            path: '/wechatTypeRelative',
+            name: 'WechatTypeRelative',
+            component: WechatTypeRelative,
+          },
+          {
+            path: '/websiteTypeRelative',
+            name: 'WebsiteTypeRelative',
+            component: WebsiteTypeRelative,
+          }
+        ]
       },
       {
         path: '/oralMap',

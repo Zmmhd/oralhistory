@@ -4,7 +4,7 @@
       <el-input v-model="title" placeholder="请输入关键字" style="width: 30%;" clearable/>
       <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
     </div>
-    <div>
+    <div style="margin: 5px 0;">
       <el-tag style="margin: 5px; cursor: pointer;" type="success" @click="changeProvince('');">全部</el-tag>
       <el-tag style="margin: 5px; cursor: pointer;" v-for="p in allProvince" type="success" @click="changeProvince(p);">
         {{ p }}

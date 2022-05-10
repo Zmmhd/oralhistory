@@ -20,7 +20,7 @@ export default {
 
 img{
   border: #e7ac94 2px solid;
-  margin-top: 20px;
+  margin: 20px;
   border-radius: 50px;
 }
 </style>

@@ -4,7 +4,7 @@
       <el-input v-model="title" placeholder="请输入关键字" style="width: 30%;" clearable/>
       <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
     </div>
-    <div>
+    <div style="margin: 5px 0;">
       <el-tag style="margin: 5px; cursor: pointer;" type="warning" @click="changeTheme('');">全部</el-tag>
       <el-tag style="margin: 5px; cursor: pointer;" v-for="t in allTheme" type="warning" @click="changeTheme(t);">
         {{ t }}
@@ -22,7 +22,7 @@
           <el-tag type="success">{{ scope.row.province }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="主题曲" sortable>
+      <el-table-column label="主题曲">
         <template #default="scope">
           <el-tag type="warning">{{ scope.row.theme }}</el-tag>
         </template>

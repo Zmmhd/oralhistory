@@ -4,14 +4,14 @@
     <el-input v-model="title" placeholder="请输入关键字" style="width: 30%;" clearable/>
     <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
     </div>
-    <div>
+    <div style="margin: 5px 0;">
       <el-tag style="margin: 5px; cursor: pointer;" v-for="t in allType" @click="changeType(t);">
         {{ t }}
       </el-tag>
     </div>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="title" label="标题"/>
-      <el-table-column label="类型" sortable>
+      <el-table-column label="类型">
         <template #default="scope">
           <el-tag>{{ scope.row.type }}</el-tag>
         </template>

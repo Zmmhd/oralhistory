@@ -61,6 +61,8 @@ export default {
         console.log(res);
         this.tableData = res.list;
         this.total = res.total;
+        this.pageNum = res.pageNum;
+        this.pageSize = res.pageSize;
       })
     },
     handleSizeChange(pageSize) {

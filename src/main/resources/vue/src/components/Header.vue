@@ -27,7 +27,12 @@
         <el-menu-item index="/momentsNotice">建设进程动态</el-menu-item>
       </el-sub-menu>
       <el-menu-item index="/principle">口述规范</el-menu-item>
-      <el-menu-item index="/knowledgePicture">知识图谱</el-menu-item>
+      <el-sub-menu index="/themeRelative">
+        <template #title>知识图谱</template>
+        <el-menu-item index="/themeRelative">省级综合档案馆口述例使档案资源建设主题相关性</el-menu-item>
+        <el-menu-item index="/WechatTypeRelative">省级综合档案馆微信公众平台口述历史档案资源类型相关性</el-menu-item>
+        <el-menu-item index="/WebsiteTypeRelative">省级综合档案馆官网口述例使档案资源类型相关性</el-menu-item>
+      </el-sub-menu>
       <el-sub-menu index="/onlineSubmit">
         <template #title>在线提交</template>
         <el-menu-item index="/submit">在线提交</el-menu-item>
