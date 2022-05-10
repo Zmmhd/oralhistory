@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.oralhistory.entity.Resource;
 import com.example.oralhistory.entity.RespondResult;
 import com.example.oralhistory.mapper.ResourceMapper;
-import com.example.oralhistory.utils.PageUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,9 @@ public class ResourceController {
     public ResponseEntity getAll(@RequestParam int pageNum,
                                  @RequestParam int pageSize){
         try {
+            PageHelper.startPage(pageNum, pageSize);
             List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().eq("status",1));
-            return RespondResult.success(PageUtils.pageInfo(resources,pageNum,pageSize));
+            return RespondResult.success(new PageInfo<>(resources));
         }catch (Exception e){
             e.printStackTrace();
             return RespondResult.error("失败",400);
@@ -65,8 +67,10 @@ public class ResourceController {
                 queryWrapper.like("title", title);
             }
             queryWrapper.eq("status",1);
+
+            PageHelper.startPage(pageNum, pageSize);
             List<Resource> resources = resourceMapper.selectList(queryWrapper);
-            return RespondResult.success(PageUtils.pageInfo(resources,pageNum,pageSize));
+            return RespondResult.success(new PageInfo<>(resources));
         }catch (Exception e){
             e.printStackTrace();
             return RespondResult.error("失败",500);

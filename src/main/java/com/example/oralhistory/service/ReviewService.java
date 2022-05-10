@@ -8,7 +8,8 @@ import com.example.oralhistory.entity.Review;
 import com.example.oralhistory.mapper.ResourceMapper;
 import com.example.oralhistory.mapper.ReviewMapper;
 import com.example.oralhistory.utils.FileUtils;
-import com.example.oralhistory.utils.PageUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,9 @@ public class ReviewService {
     public ResponseEntity getByStatus(Integer status, int pageNum, int pageSize) {
         try {
             if (status == -1 || status == 0 || status == 1) {
+                PageHelper.startPage(pageNum, pageSize);
                 List<Review> reviews = reviewMapper.selectList(new QueryWrapper<Review>().eq("status", status));
-                return RespondResult.success(PageUtils.pageInfo(reviews, pageNum, pageSize));
+                return RespondResult.success(new PageInfo<>(reviews));
             }
             return RespondResult.error("状态位错误", 400);
         } catch (Exception e) {
@@ -48,9 +50,9 @@ public class ReviewService {
 
     public ResponseEntity likeTitle(String title, int pageNum, int pageSize) {
         try {
+            PageHelper.startPage(pageNum, pageSize);
             List<Review> reviews = reviewMapper.selectList(new QueryWrapper<Review>().like("title", title));
-
-            return RespondResult.success(PageUtils.pageInfo(reviews, pageNum, pageSize));
+            return RespondResult.success(new PageInfo<>(reviews));
         } catch (Exception e) {
             e.printStackTrace();
             return RespondResult.error("失败", 500);
@@ -59,8 +61,9 @@ public class ReviewService {
 
     public ResponseEntity likeUpnumber(String upernumber, int pageNum, int pageSize) {
         try {
+            PageHelper.startPage(pageNum, pageSize);
             List<Review> reviews = reviewMapper.selectList(new QueryWrapper<Review>().like("upernumber", upernumber));
-            return RespondResult.success(PageUtils.pageInfo(reviews, pageNum, pageSize));
+            return RespondResult.success(new PageInfo<>(reviews));
         } catch (Exception e) {
             e.printStackTrace();
             return RespondResult.error("失败", 500);
