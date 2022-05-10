@@ -4,10 +4,7 @@
       {{ time }}
     </div>
   </div>
-  <div id="title">
-<!--    <div style="margin-left: 50px;"><i>口述历史</i></div>-->
-    <div><img src="@/assets/plum2.0.jpg" alt=""></div>
-  </div>
+  <div style="height: 95px;"><img src="@/assets/plum2.0.jpg" alt=""></div>
   <div>
     <el-menu router
              default-active="/mainPage"
@@ -44,7 +41,6 @@
       <!--    </div>-->
     </el-menu>
   </div>
-
 
 
 </template>
@@ -89,5 +85,10 @@ export default {
 
 .el-menu-item:hover {
   background-color: #d1806c !important;
+}
+
+img {
+  width: 100%;
+  overflow: hidden;
 }
 </style>

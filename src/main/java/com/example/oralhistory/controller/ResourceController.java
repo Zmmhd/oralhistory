@@ -90,7 +90,7 @@ public class ResourceController {
     @GetMapping("/getClassification/{target}")
     public ResponseEntity getClassification(@PathVariable String target) {
         try {
-            if ("province".equals(target) || "theme".equals(target)) {
+            if (!"province".equals(target) && !"theme".equals(target)) {
                 return RespondResult.error("指定分类名错误", 400);
             }
             List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().select("Distinct " + target));

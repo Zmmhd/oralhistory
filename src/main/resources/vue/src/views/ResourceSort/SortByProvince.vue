@@ -5,8 +5,10 @@
       <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
     </div>
     <div>
-      <el-tag style="cursor: pointer;" type="success" @click="this.province = ''; load();">全部</el-tag>
-      <el-tag style="margin: 5px; cursor: pointer;" v-for="p in allProvince" type="success" @click="this.province = p; load();">{{ p }}</el-tag>
+      <el-tag style="margin: 5px; cursor: pointer;" type="success" @click="changeProvince('');">全部</el-tag>
+      <el-tag style="margin: 5px; cursor: pointer;" v-for="p in allProvince" type="success" @click="changeProvince(p);">
+        {{ p }}
+      </el-tag>
     </div>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="title" label="标题"/>
@@ -15,7 +17,7 @@
           <el-tag>{{ scope.row.type }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="省份" sortable>
+      <el-table-column label="省份">
         <template #default="scope">
           <el-tag type="success">{{ scope.row.province }}</el-tag>
         </template>
@@ -54,10 +56,11 @@ export default {
       pageSize: 10,
       total: 0,
       title: "",
-      allProvince: ["y","d","s","q"]
+      allProvince: []
     }
   },
   created() {
+    this.getAllProvince();
     this.load();
   },
   methods: {
@@ -73,6 +76,15 @@ export default {
         }
       }).then(res => {
         console.log(res);
+        for (let i of res.list) {
+          if (i.type === 1) {
+            i.type = "文章"
+          } else if (i.type === 2) {
+            i.type = "视频"
+          } else {
+            i.type = "音频"
+          }
+        }
         this.tableData = res.list;
         this.total = res.total;
         this.pageNum = res.pageNum;
@@ -87,6 +99,16 @@ export default {
       this.pageNum = pageNum
       this.load()
     },
+    getAllProvince() {
+      request.get("/resource/getClassification/" + "province").then(res => {
+        console.log(res);
+        this.allProvince = res;
+      })
+    },
+    changeProvince(p) {
+      this.province = p;
+      this.load();
+    }
   }
 }
 </script>

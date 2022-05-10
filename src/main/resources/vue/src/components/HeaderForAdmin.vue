@@ -3,11 +3,8 @@
     <div class="time">
       {{ time }}
     </div>
-
   </div>
-  <div id="title">
-    <div><img src="@/assets/plum2.0.jpg" alt=""></div>
-  </div>
+  <div style="height: 95px;"><img src="@/assets/plum2.0.jpg" alt=""></div>
   <div>
     <el-menu router
              default-active="/manageResource"
@@ -71,7 +68,14 @@ export default {
   margin: auto 0 auto 20px;
   user-select: none;
 }
+
 .el-menu-item:hover {
   background-color: #d1806c !important;
+}
+
+
+img {
+  width: 100%;
+  overflow: hidden;
 }
 </style>
