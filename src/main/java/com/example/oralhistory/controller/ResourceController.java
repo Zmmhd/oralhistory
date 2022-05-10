@@ -94,11 +94,11 @@ public class ResourceController {
                 return RespondResult.error("指定分类名错误", 400);
             }
             List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().select("Distinct " + target));
-            List<String> province = new ArrayList<>();
+            List<String> targets = new ArrayList<>();
             for (Resource resource : resources) {
-                province.add(resource.getProvince());
+                targets.add("province".equals(target)?resource.getProvince():resource.getTheme());
             }
-            return RespondResult.success(province);
+            return RespondResult.success(target);
         } catch (Exception e) {
             e.printStackTrace();
             return RespondResult.error("失败", 500);

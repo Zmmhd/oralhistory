@@ -28,7 +28,7 @@ class ResourceMapperTest {
 
     @Test
     void testDistinct(){
-        List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().select("Distinct province"));
+        List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().select("Distinct theme"));
         List<String> province = new ArrayList<>();
         for (Resource resource : resources) {
             province.add(resource.getProvince());
