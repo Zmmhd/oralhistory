@@ -2,19 +2,19 @@
   <el-menu router class="menu" text-color="#fff" active-text-color="#f05053"  default-active="/themeRelative">
     <el-menu-item index="/themeRelative">
       <el-icon>
-        <IceCream/>
+        <MagicStick/>
       </el-icon>
       省级综合档案馆口述例使档案资源建设主题相关性
     </el-menu-item>
     <el-menu-item index="/WechatTypeRelative">
       <el-icon>
-        <IceDrink/>
+        <MoonNight/>
       </el-icon>
       省级综合档案馆微信公众平台口述历史档案资源类型相关性
     </el-menu-item>
     <el-menu-item index="/WebsiteTypeRelative">
       <el-icon>
-        <IceDrink/>
+        <ToiletPaper/>
       </el-icon>
       省级综合档案馆官网口述例使档案资源类型相关性
     </el-menu-item>
@@ -22,13 +22,14 @@
 </template>
 
 <script>
-import {IceCream, IceDrink} from '@element-plus/icons-vue'
+import {MagicStick, MoonNight, ToiletPaper} from '@element-plus/icons-vue'
 
 export default {
   name: "AsideForKnowledgePicture",
   components: {
-    IceCream,
-    IceDrink
+    MagicStick,
+    MoonNight,
+    ToiletPaper
   }
 }
 </script>

@@ -4,7 +4,9 @@
       {{ time }}
     </div>
   </div>
-  <div style="height: 95px;"><img src="@/assets/plum2.0.jpg" alt=""></div>
+  <div class="header-pic">
+    <img src="@/assets/MegaTron.jpg" alt="">
+  </div>
   <div>
     <el-menu router
              default-active="/mainPage"
@@ -75,10 +77,9 @@ export default {
 .timeAndLogin {
   margin: 0;
   height: 30px;
-  /*background-color: #f05053;*/
-  background: #e1eec3; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #e7ac94, #e1eec3); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #e7ac94, #e1eec3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #C6FFDD;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   line-height: 30px;
   color: #fff;
 }
@@ -95,5 +96,11 @@ export default {
 img {
   width: 100%;
   overflow: hidden;
+}
+
+.header-pic{
+  background: #C6FFDD;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FBD786, #f7797d, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FBD786, #f7797d, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>
