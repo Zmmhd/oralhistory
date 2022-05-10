@@ -10,10 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Zmm
  * @since 2022-05-02
  */
@@ -26,32 +26,34 @@ public class ResourceController {
 
     /**
      * 获得全部资源列表
-     * @return
+     *
+     * @return 返回全部资源
      */
     @GetMapping("/get")
     public ResponseEntity getAll(@RequestParam int pageNum,
-                                 @RequestParam int pageSize){
+                                 @RequestParam int pageSize) {
         try {
             PageHelper.startPage(pageNum, pageSize);
-            List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().eq("status",1));
+            List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().eq("status", 1));
             return RespondResult.success(new PageInfo<>(resources));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return RespondResult.error("失败",400);
+            return RespondResult.error("失败", 400);
         }
     }
 
     /**
      * 按关键字检索标题
-     * @return
+     *
+     * @return 响应
      */
     @GetMapping("/query")
-    public  ResponseEntity query(@RequestParam String title,
-                                 @RequestParam Integer type,
-                                 @RequestParam String province,
-                                 @RequestParam String theme,
-                                 @RequestParam int pageNum,
-                                 @RequestParam int pageSize){
+    public ResponseEntity query(@RequestParam String title,
+                                @RequestParam Integer type,
+                                @RequestParam String province,
+                                @RequestParam String theme,
+                                @RequestParam int pageNum,
+                                @RequestParam int pageSize) {
         try {
             QueryWrapper<Resource> queryWrapper = new QueryWrapper<>();
             if (type == 1 || type == 2 || type == 3) {
@@ -66,15 +68,40 @@ public class ResourceController {
             if (!title.isEmpty()) {
                 queryWrapper.like("title", title);
             }
-            queryWrapper.eq("status",1);
+            queryWrapper.eq("status", 1);
 
             PageHelper.startPage(pageNum, pageSize);
             List<Resource> resources = resourceMapper.selectList(queryWrapper);
             return RespondResult.success(new PageInfo<>(resources));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return RespondResult.error("失败",500);
+            return RespondResult.error("失败", 500);
         }
 
+    }
+
+    /**
+     * 用于获取分类项
+     * 如省份有哪些，主题有哪些
+     *
+     * @param target 指定分类名，province或theme
+     * @return 返回字符串列表
+     */
+    @GetMapping("/getClassification/{target}")
+    public ResponseEntity getClassification(@PathVariable String target) {
+        try {
+            if ("province".equals(target) || "theme".equals(target)) {
+                return RespondResult.error("指定分类名错误", 400);
+            }
+            List<Resource> resources = resourceMapper.selectList(new QueryWrapper<Resource>().select("Distinct " + target));
+            List<String> province = new ArrayList<>();
+            for (Resource resource : resources) {
+                province.add(resource.getProvince());
+            }
+            return RespondResult.success(province);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return RespondResult.error("失败", 500);
+        }
     }
 }
