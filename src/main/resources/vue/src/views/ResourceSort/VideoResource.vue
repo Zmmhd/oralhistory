@@ -42,7 +42,7 @@ export default {
             type: "video/mp4",
             //url地址
             // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-            src: require("E:/SHU/大创/后端/oralhistory/src/main/webapp/uploadFile/zmm/1-6/1.mp4"),
+            src: "http://localhost:8888/uploadFile/1.mp4",
           },
         ],
         //你的封面地址
