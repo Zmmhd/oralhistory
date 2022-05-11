@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <el-button @click="back">返回</el-button>
-    <videoPlayer class="video-player vjs-custom-skin"
-                 ref="videoPlayer"
-                 :playsinline="true"
-                 :options="playerOptions">
-    </videoPlayer>
+  <div style="margin: 10px;">
+    <div style="border-bottom: #f05053 dashed 1px;">
+      <el-button style="margin: 10px 0;" @click="back" type="info">返回</el-button>
+    </div>
+    <div style="margin: 20px; padding: 20px; border: 2px #e7ac94 solid; border-radius: 5px;">
+      <videoPlayer class="video-player vjs-custom-skin"
+                   ref="videoPlayer"
+                   :playsinline="true"
+                   :options="playerOptions">
+      </videoPlayer>
+    </div>
   </div>
 </template>
 <script>
@@ -13,13 +17,28 @@ import {videoPlayer} from 'vue-video-player/src'
 import 'vue-video-player/src/custom-theme.css'
 import 'video.js/dist/video-js.css'
 
+import baseUrl from "@/assets/Config"
+import request from "@/utils/request";
+
 export default {
   name: "VideoResource",
   components: {
     videoPlayer
   },
+  created() {
+    console.log(this.currentId);
+    // request.get("", {
+    //   params: {
+    //     id: this.currentId
+    //   }
+    // }).then(res => {
+    //   this.url = baseUrl.BASE_URL + res;
+    // })
+  },
   data() {
     return {
+      currentResource: sessionStorage.getItem("currentResource"),
+      currentId: sessionStorage.getItem("currentId"),
       playerOptions: {
         //播放速度
         playbackRates: [0.5, 1.0, 1.5, 2.0],
@@ -42,7 +61,7 @@ export default {
             type: "video/mp4",
             //url地址
             // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-            src: "http://localhost:8888/uploadFile/1.mp4",
+            src: baseUrl.BASE_URL + "2.mp4",
           },
         ],
         //你的封面地址

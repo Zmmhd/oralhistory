@@ -73,7 +73,7 @@ export default {
           pageSize: this.pageSize
         }
       }).then(res =>{
-        console.log(res);
+        // console.log(res);
         for (let i of res.list) {
           if (i.type === 1) {
             i.type = "文章"
@@ -105,9 +105,8 @@ export default {
       this.load();
     },
     rowClick(row, event, column) {
-      console.log(row, event, column);
       // 以下内容需要往下一个路由传
-      sessionStorage.setItem("currentResource", row); // 当前资源
+      sessionStorage.setItem("currentId", row.id); // 当前资源id
       sessionStorage.setItem("currentSort", "/sortByType"); // 当前路由
       if (row.type === "文章") {
         this.$router.push("/articleResource");
