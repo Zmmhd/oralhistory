@@ -27,17 +27,10 @@ export default {
   },
   created() {
     console.log(this.currentId);
-    // request.get("", {
-    //   params: {
-    //     id: this.currentId
-    //   }
-    // }).then(res => {
-    //   this.url = baseUrl.BASE_URL + res;
-    // })
+    console.log(this.playerOptions.sources[0].src);
   },
   data() {
     return {
-      currentResource: sessionStorage.getItem("currentResource"),
       currentId: sessionStorage.getItem("currentId"),
       playerOptions: {
         //播放速度
@@ -61,7 +54,7 @@ export default {
             type: "video/mp4",
             //url地址
             // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-            src: baseUrl.BASE_URL + "2.mp4",
+            src: baseUrl.BASE_URL + sessionStorage.getItem("currentUrl")
           },
         ],
         //你的封面地址

@@ -9,7 +9,7 @@
         {{ t }}
       </el-tag>
     </div>
-    <el-table :data="tableData" style="width: 100%" @row-click="rowClick">
+    <el-table :data="tableData" style="width: 100%; cursor: pointer;" @row-click="rowClick">
       <el-table-column prop="title" label="标题"/>
       <el-table-column label="类型">
         <template #default="scope">
@@ -108,6 +108,7 @@ export default {
       // 以下内容需要往下一个路由传
       sessionStorage.setItem("currentId", row.id); // 当前资源id
       sessionStorage.setItem("currentSort", "/sortByType"); // 当前路由
+      sessionStorage.setItem("currentUrl", row.url); // 当前资源的url
       if (row.type === "文章") {
         this.$router.push("/articleResource");
       } else if (row.type === "视频") {

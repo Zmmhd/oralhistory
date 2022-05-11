@@ -17,19 +17,12 @@ export default {
   name: "AudioResource",
   created() {
     console.log(this.currentId);
-    // request.get("", {
-    //   params: {
-    //     id: this.currentId
-    //   }
-    // }).then(res => {
-    //   this.url = baseUrl.BASE_URL + res;
-    // })
+    console.log(this.url);
   },
   data() {
     return {
-      currentResource: sessionStorage.getItem("currentResource"),
       currentId: sessionStorage.getItem("currentId"),
-      url: baseUrl.BASE_URL + "26.mp3"
+      url: baseUrl.BASE_URL + sessionStorage.getItem("currentUrl")
     }
   },
   methods: {

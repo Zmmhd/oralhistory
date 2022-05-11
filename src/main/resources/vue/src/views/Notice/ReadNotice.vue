@@ -14,7 +14,7 @@ import baseUrl from "@/assets/Config";
 import request from "@/utils/request";
 
 export default {
-  name: "ArticleResource",
+  name: "ReadNotice",
   created() {
     console.log(typeof this.currentId);
     console.log(this.currentId);

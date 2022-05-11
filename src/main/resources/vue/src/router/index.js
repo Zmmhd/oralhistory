@@ -26,6 +26,8 @@ import WebsiteTypeRelative from "@/views/KnowledgePicture/WebsiteTypeRelative";
 import VideoResource from "@/views/ResourceSort/VideoResource";
 import AudioResource from "@/views/ResourceSort/AudioResource";
 import ArticleResource from "@/views/ResourceSort/ArticleResource";
+import ReadNotice from "@/views/Notice/ReadNotice";
+import ManageReadNotice from "@/views/Administrator/ManageReadNotice";
 
 const routes = [
   {
@@ -90,7 +92,12 @@ const routes = [
             path: '/raiseNotice',
             name: 'RaiseNotice',
             component: RaiseNotice,
-          }
+          },
+          {
+            path: '/readNotice',
+            name: 'ReadNotice',
+            component: ReadNotice,
+          },
         ]
       },
       {
@@ -174,6 +181,11 @@ const routes = [
             path: '/manageMomentsNotice',
             name: 'ManageMomentsNotice',
             component: ManageMomentsNotice,
+          },
+          {
+            path: '/manageReadNotice',
+            name: 'ManageReadNotice',
+            component: ManageReadNotice,
           }
         ]
       }

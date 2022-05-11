@@ -16,8 +16,13 @@
 </template>
 
 <script>
+import {IceCream, IceDrink} from '@element-plus/icons-vue'
 export default {
-  name: "AsideForManageNotice"
+  name: "AsideForManageNotice",
+  components: {
+    IceCream,
+    IceDrink
+  }
 }
 </script>
 

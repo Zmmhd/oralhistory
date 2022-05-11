@@ -4,10 +4,10 @@
       <el-button type="info" @click="add">新增公告</el-button>
     </div>
 
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="tableData" style="width: 100%; cursor: pointer;" @row-click="rowClick">
       <el-table-column prop="title" label="标题"/>
 
-      <el-table-column label="上传时间" width="180">
+      <el-table-column label="上传时间" width="180" sortable>
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon>
@@ -83,6 +83,13 @@ export default {
     handleCurrentChange(pageNum) {
       this.pageNum = pageNum
       this.load()
+    },
+    rowClick(row, event, column) {
+      // 以下内容需要往下一个路由传
+      sessionStorage.setItem("currentId", row.id); // 当前通知id
+      sessionStorage.setItem("currentSort", "/manageRaiseNotice"); // 当前路由
+      sessionStorage.setItem("currentUrl", row.url); // 当前通知的url
+      this.$router.push("/manageReadNotice");
     },
     handleEdit(row) {
 
