@@ -17,7 +17,6 @@
         </div>
         <div class="teleport">
           <li @click="$router.push('/principle')">口述规范</li>
-          <li @click="$router.push('/about')">联系我们</li>
         </div>
       </div>
     </div>
@@ -32,14 +31,14 @@ export default {
 
 <style scoped>
 .bottom {
-  background-color: #fab583;
+  background-color: #FBD786;
   width: 100%;
   height: 120px;
-  box-shadow: 0 0px 10px 5px #fab583;
+  box-shadow: 0 0px 10px 5px #FBD786;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #7a7a7a;
+  color: #fff;
 }
 
 .second-bottom {

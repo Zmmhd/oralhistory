@@ -8,7 +8,6 @@ import SortByType from "@/views/ResourceSort/SortByType";
 import Notice from "@/views/Notice/Notice";
 import MomentsNotice from "@/views/Notice/MomentsNotice";
 import RaiseNotice from "@/views/Notice/RaiseNotice";
-import About from "@/views/About";
 import Principle from "@/views/Principle";
 import OralMap from "@/views/OralMap";
 import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit";
@@ -28,6 +27,7 @@ import AudioResource from "@/views/ResourceSort/AudioResource";
 import ArticleResource from "@/views/ResourceSort/ArticleResource";
 import ReadNotice from "@/views/Notice/ReadNotice";
 import ManageReadNotice from "@/views/Administrator/ManageReadNotice";
+import SearchResult from "@/views/MainPage/SearchResult";
 
 const routes = [
   {
@@ -150,9 +150,9 @@ const routes = [
         ]
       },
       {
-        path: '/about',
-        name: 'About',
-        component: About,
+        path: '/searchResult',
+        name: 'SearchResult',
+        component: SearchResult,
       }
     ]
   },

@@ -25,6 +25,45 @@
         --el-button-border-color: #f05053 !important;
         --el-button-hover-border-color: #e7ac94 !important;
     }
+
+    .el-menu-item:hover {
+        background-color: #d1806c !important;
+    }
+
+    .search-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 80px;
+        background-color: #f7797d;
+        height: 20px;
+        padding: 10px;
+        border-radius: 50px;
+        box-shadow: 0 0 25px 0 rgba(247, 121, 125, 0.8);
+    }
+
+    .search-btn {
+        border: none;
+        background: none;
+        outline: none;
+        width: 40px;
+        margin-top: -21px;
+        display: flex;
+        justify-self: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .search-btn i {
+        z-index: 1;
+        background: #FBD786;
+        font-size: 25px;
+        color: #333A45;
+        padding: 10px;
+        border-radius: 50px;
+        box-shadow: 0 0 25px 0 rgba(251, 215, 134, 0.8);
+    }
+
 </style>
 <html lang="">
 <head>
@@ -32,6 +71,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <!--    <title><%= htmlWebpackPlugin.options.title %></title>-->
     <title>口述历史oralhistory</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>

@@ -1,12 +1,10 @@
 <template>
-  <div class="timeAndLogin">
-    <div class="time">
-      {{ time }}
-    </div>
-  </div>
+  <Date></Date>
+
   <div class="header-pic">
     <img src="@/assets/MegaTron.jpg" alt="">
   </div>
+
   <div>
     <el-menu router
              default-active="/mainPage"
@@ -41,66 +39,33 @@
         <el-menu-item index="/review">审核查询</el-menu-item>
       </el-sub-menu>
       <el-menu-item index="/oralMap">口述地图</el-menu-item>
-      <el-menu-item index="/about">联系我们</el-menu-item>
-      <!--    <div style="height: 35px; margin: auto 0 auto 250px;">-->
-      <!--      <el-input v-model="search" placeholder="请输入关键字" style="width: 150px;"/>-->
-      <!--      <el-button type="info" style="margin-left: 5px;">查询</el-button>-->
-      <!--    </div>-->
     </el-menu>
   </div>
-
 
 </template>
 
 <script>
+import Date from "@/components/Date"
+
 export default {
   name: "Header",
-  data() {
-    return {
-      time: "",
-      weekInChinese: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
-
-      // search: ""
-    }
-  },
-  created() {
-    setInterval(() => {
-      let time = new Date();
-      let week = time.getDay();
-      this.time = time.toLocaleString() + " " + this.weekInChinese[week];
-    }, 1000)
+  components: {
+    Date
   }
 }
 </script>
 
 <style scoped>
-.timeAndLogin {
-  margin: 0;
-  height: 30px;
-  background: #C6FFDD;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  line-height: 30px;
-  color: #fff;
-}
-
-.time {
-  margin: auto 0 auto 20px;
-  user-select: none;
-}
-
-.el-menu-item:hover {
-  background-color: #d1806c !important;
-}
 
 img {
   width: 100%;
   overflow: hidden;
 }
 
-.header-pic{
-  background: #C6FFDD;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FBD786, #f7797d, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+.header-pic {
+  background: #C6FFDD; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FBD786, #f7797d, #C6FFDD); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #FBD786, #f7797d, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 </style>

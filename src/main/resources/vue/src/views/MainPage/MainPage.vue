@@ -1,6 +1,7 @@
 <template>
+  <Search></Search>
   <div>
-    <el-carousel interval="2000" type="card" height="400px" style="background-color: #FFF9EF;">
+    <el-carousel :interval=2000 type="card" height="400px" class="backgroundColor">
       <el-carousel-item v-for="item in imageBox" :key="item.signal" style="margin: 10px;">
         <img :src="item.url" class="image" @click="specialPage(item.signal)">
       </el-carousel-item>
@@ -9,8 +10,12 @@
 </template>
 
 <script>
+import Search from "@/components/Search";
 export default {
   name: "MainPage",
+  components: {
+    Search
+  },
   data() {
     return {
       imageBox: [
@@ -54,5 +59,11 @@ img {
   line-height: 400px;
   margin: 0;
   text-align: center;
+}
+
+.backgroundColor{
+  background: #ADA996;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>

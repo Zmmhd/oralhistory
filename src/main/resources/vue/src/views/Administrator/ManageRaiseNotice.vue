@@ -20,7 +20,6 @@
 
       <el-table-column fixed="right" label="操作" width="120">
         <template #default="scope">
-          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
           <el-popconfirm title="确定删除此公告吗？" @confirm="handleDelete(scope.row)">
             <template #reference>
               <el-button type="text" size="small">删除</el-button>
@@ -90,9 +89,6 @@ export default {
       sessionStorage.setItem("currentSort", "/manageRaiseNotice"); // 当前路由
       sessionStorage.setItem("currentUrl", row.url); // 当前通知的url
       this.$router.push("/manageReadNotice");
-    },
-    handleEdit(row) {
-
     },
     handleDelete(row) {
 
