@@ -63,6 +63,7 @@ export default {
   font-size: smaller;
   list-style: none;
   user-select: none;
+  transition: all 0.3s;
 }
 
 .teleport li:hover{

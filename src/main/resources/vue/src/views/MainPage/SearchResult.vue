@@ -2,7 +2,7 @@
   <div class="search-box-outer">
     <div class="overview"><h3>资源总览</h3></div>
     <div class="search-box">
-      <input type="text" v-model="search" placeholder="请输入关键字" v-on:keydown.enter="load">
+      <input type="text" v-model="search" placeholder="请输入关键字" @keydown.enter="load">
       <button class="search-btn" type="button" @click="load">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
@@ -212,7 +212,7 @@ export default {
 }
 
 .nothingFound {
-  min-height: 75vh;
+  min-height: 50vh;
   width: 100%;
   display: flex;
   justify-content: center;

@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap');
+
     body {
         margin: 0;
         padding: 0;
         font-family: 'Noto Serif SC', serif;
     }
 
-    .el-input__wrapper.is-focus{
+    .el-input__wrapper.is-focus {
         box-shadow: 0 0 0 1px #f05053 inset !important;
     }
 
-    .el-pager li.is-active, .el-pager li:hover, .el-pagination button:hover, .el-select-dropdown__item.selected{
+    .el-pager li.is-active, .el-pager li:hover, .el-pagination button:hover, .el-select-dropdown__item.selected {
         color: #f05053 !important;
     }
 
-    .el-select{
+    .el-select {
         --el-select-input-focus-border-color: #f05053 !important;
     }
 
-    .el-button--info{
+    .el-button--info {
         --el-button-bg-color: #f05053 !important;
         --el-button-hover-bg-color: #e7ac94 !important;
         --el-button-border-color: #f05053 !important;
@@ -42,6 +43,11 @@
         box-shadow: 0 0 25px 0 rgba(247, 121, 125, 0.8);
     }
 
+    .search-box input::-webkit-input-placeholder {
+        color: #fff;
+        opacity: 0.4;
+    }
+
     .search-btn {
         border: none;
         background: none;
@@ -62,6 +68,11 @@
         padding: 10px;
         border-radius: 50px;
         box-shadow: 0 0 25px 0 rgba(251, 215, 134, 0.8);
+        transition: all 0.3s;
+    }
+
+    .search-btn i:hover {
+        box-shadow: 0 0 25px 0 rgba(207, 158, 47, 0.8);
     }
 
 </style>
@@ -72,7 +83,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<!--    <title><%= htmlWebpackPlugin.options.title %></title>-->
+    <!--    <title><%= htmlWebpackPlugin.options.title %></title>-->
     <title>口述历史oralhistory</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
 </head>

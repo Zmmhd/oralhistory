@@ -2,7 +2,7 @@
   <div class="search-box-outer">
     <div class="overview"></div>
     <div class="search-box">
-      <input type="text" v-model="search" placeholder="请输入关键字">
+      <input type="text" v-model="search" placeholder="请输入关键字" @keydown.enter="searchForResult">
       <button class="search-btn" type="button" @click="searchForResult">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
