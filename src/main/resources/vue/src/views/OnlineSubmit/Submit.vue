@@ -28,7 +28,15 @@
       <el-input v-model="form.upernumber"/>
     </el-form-item>
     <el-form-item label="文件上传">
-      <el-upload action="" :auto-upload="false" ref="uploadRef" :http-request="uploadFile">
+      <!--      <el-upload action="" :auto-upload="false" ref="uploadRef" :http-request="uploadFile">-->
+      <!--        <el-button type="primary">Click to upload</el-button>-->
+      <!--        <template #tip>-->
+      <!--          <div>-->
+      <!--            jpg/png files with a size less than 500KB.-->
+      <!--          </div>-->
+      <!--        </template>-->
+      <!--      </el-upload>-->
+      <el-upload :action=url :on-success="fileUploadSuccess">
         <el-button type="primary">Click to upload</el-button>
         <template #tip>
           <div>
@@ -44,6 +52,7 @@
 <script>
 import {UploadFilled} from '@element-plus/icons-vue'
 import request from "@/utils/request";
+import baseUrl from "@/assets/Config"
 
 export default {
   name: "Submit",
@@ -53,6 +62,8 @@ export default {
   data() {
     return {
       form: {},
+      url: "http://localhost:8888/uploadfile",
+      currentUrl: ""
     }
   },
   created() {
@@ -60,12 +71,43 @@ export default {
   },
   methods: {
     // 自定义上传
-    uploadFile(params) {
-      const fileObj = params.file;
-      let data = new FormData();
-      data.append("multipartFile", fileObj);
+    // uploadFile(params) {
+    //   const fileObj = params.file;
+    //   let data = new FormData();
+    //   data.append("multipartFile", fileObj);
+    //   let resource = {
+    //     "type": this.form.type,
+    //     "title": this.form.title,
+    //     "synopsis": this.form.synopsis,
+    //     "province": this.form.province,
+    //     "archives": this.form.archives,
+    //     "theme": this.form.theme,
+    //     "upercity": this.form.upercity,
+    //     "upername": this.form.upername,
+    //     "upernumber": this.form.upernumber
+    //   };
+    //   data.append('resource', JSON.stringify(resource));
+    //   let review = {
+    //     "title": this.form.title,
+    //     "synopsis": this.form.synopsis,
+    //     "upernumber": this.form.upernumber
+    //   };
+    //   data.append('review', JSON.stringify(review));
+    //   console.log("fsdfdsfsfdsfsdfd")
+    //   request.post("/review/upload", data).then(res => {
+    //     console.log(res);
+    //   })
+    // },
+    // save() {
+    //   this.$refs.uploadRef.submit(); //触发自定义上传
+    // }
+    fileUploadSuccess(response) {
+      this.currentUrl = response;
+    },
+    save() {
       let resource = {
         "type": this.form.type,
+        "url": this.currentUrl,
         "title": this.form.title,
         "synopsis": this.form.synopsis,
         "province": this.form.province,
@@ -75,20 +117,15 @@ export default {
         "upername": this.form.upername,
         "upernumber": this.form.upernumber
       };
-      data.append('resource', JSON.stringify(resource));
-      let review = {
-        "title": this.form.title,
-        "synopsis": this.form.synopsis,
-        "upernumber": this.form.upernumber
-      };
-      data.append('review', JSON.stringify(review));
-      console.log("fsdfdsfsfdsfsdfd")
-      request.post("/review/upload", data).then(res => {
-        console.log(res);
+      console.log(this.currentUrl);
+      console.log(resource);
+      request.get("/review/addreview", resource).then(res => {
+        console.log(1)
+        this.$message({
+          type: 'success',
+          message: "成功"
+        })
       })
-    },
-    save() {
-      this.$refs.uploadRef.submit(); //触发自定义上传
     }
   }
 }

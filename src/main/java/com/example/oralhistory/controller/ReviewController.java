@@ -97,9 +97,8 @@ public class ReviewController {
      * @return
      */
     @RequestMapping("/addreview")
-    public ResponseEntity addreview(@RequestParam("resource") Resource resource) {
+    public ResponseEntity addreview(@RequestBody Resource resource) {
         resource.setStatus(0);
-        resource.setUptime(LocalDate.now());
         resource.setUptime(LocalDate.now());
         return reviewService.addreview(resource);
     }
