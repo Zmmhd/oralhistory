@@ -25,10 +25,7 @@ public class RespondResult<T> implements Serializable {
     public static ResponseEntity<Object> success(Object data){
         RespondResult<Object> result = new RespondResult<>();
         result.setData(data);
-        if(data.getClass() == String.class){
-            return new ResponseEntity<>("\""+data+"\"",HttpStatus.valueOf(200));
-        }
-        return new ResponseEntity<>(data, HttpStatus.valueOf(200));
+        return new ResponseEntity<>(result,HttpStatus.valueOf(200));
     }
 
     // 失败返回
