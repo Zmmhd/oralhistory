@@ -119,7 +119,7 @@ export default {
       };
       console.log(this.currentUrl);
       console.log(resource);
-      request.get("/review/addreview", resource).then(res => {
+      request.post("/review/addreview", resource).then(res => {
         console.log(1)
         this.$message({
           type: 'success',
