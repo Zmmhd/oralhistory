@@ -21,7 +21,7 @@ import java.io.File;
  */
 @RestController
 public class FileController {
-    @RequestMapping("/uploadfile/{isarticle}")
+    @RequestMapping("/uploadfile")
     public ResponseEntity uploadfile(@RequestParam MultipartFile file,
                                      HttpServletRequest request) {
 
