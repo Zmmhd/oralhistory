@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -72,6 +71,7 @@ public class ReviewService {
 
     /**
      * 通过审核，修改为审核通过状态
+     *
      * @param id 审核id号
      * @return 响应
      */
@@ -118,37 +118,20 @@ public class ReviewService {
         return RespondResult.success("成功");
     }
 
-    /**
-     * @param file
-     * @param review
-     * @param resource
-     * @return
-     */
     @Transactional
-    public ResponseEntity uploadFile(MultipartFile file, Review review,
-                                     Resource resource,
-                                     HttpServletRequest request) {
-
-        //设置文件上传保存文件路径：保存在项目运行目录下的uploadFile文件夹
-        String savepath = request.getSession().getServletContext().getRealPath("/uploadFile/") + FileUtils.getType(resource.getType());
-        String newname = null;
+    public ResponseEntity addreview(Resource resource, Review review) {
         try {
-            newname = FileUtils.saveFile(savepath, file);
+            resourceMapper.insert(resource);
+            //获得resource的id
+            review.setResourceid(resourceMapper.selectOne(new QueryWrapper<Resource>().eq("url", resource.getUrl())).getId());
+
+            reviewMapper.insert(review);
+            return RespondResult.success("成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return RespondResult.error("失败", 400);
+            return RespondResult.error("失败", 500);
         }
-
-        // 修改resource的url并且插入数据库中
-        resource.setUrl(newname);
-        resourceMapper.insert(resource);
-
-        // 获得resource的id
-        review.setResourceid(resourceMapper.selectOne(new QueryWrapper<Resource>().eq("url", resource.getUrl())).getId());
-
-        //插入review
-        reviewMapper.insert(review);
-        return RespondResult.success("成功");
     }
+
 
 }

@@ -1,9 +1,8 @@
 package com.example.oralhistory.utils;
 
-import com.example.oralhistory.entity.RespondResult;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.UUID;
 
@@ -19,6 +18,7 @@ public class FileUtils {
 
     /**
      * 保存文件
+     *
      * @param path 保存文件的路径
      * @param file 文件
      * @return 返回新的文件名
@@ -41,24 +41,25 @@ public class FileUtils {
         return newname;
     }
 
-    public static void deleteFile(String filename, String filepath)throws Exception{
+    public static void deleteFile(String filename, String filepath) throws Exception {
         File file = new File(filepath);
-        if(file.exists()){
+        if (file.exists()) {
             file.delete();
         }
     }
 
-    public static String getType(int i){
+    public static String getType(int i) {
         switch (i) {
             case 1:
-                return  "article";
+                return "article";
             case 2:
-                return  "video";
+                return "video";
             case 3:
-                return  "vocal";
+                return "vocal";
             default:
                 return null;
         }
     }
+
 
 }

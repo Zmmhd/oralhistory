@@ -7,7 +7,6 @@ import com.example.oralhistory.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -91,40 +90,20 @@ public class ReviewController {
     }
 
     /**
-     * 上传文件与新建一个审核和资源
+     * 新建一个审核和资源
      * 注意传过来的两个实体要满足下列条件
      *
-     * @param multipartFile 用户上传的文件
-     * @param resource      不需要字段id、status、uptime、url、
-     * @param review        不需要的字段id、status、uptime、resourceid、
+     * @param resource 不需要字段id、status、uptime
+     * @param review   不需要的字段id、status、uptime、resourceid、
      * @return
      */
-//    @RequestMapping("/upload")
-//    public ResponseEntity upload(@RequestParam("multipartFile") MultipartFile multipartFile,
-//                                 @RequestParam("resource") String resource,
-//                                 @RequestParam("review") String review,
-//                                 HttpServletRequest request) {
-//        System.out.println("dDADAAFF");
-////        resource.setStatus(0);
-////        review.setStatus(0);
-////        resource.setUptime(LocalDate.now());
-////        resource.setUptime(LocalDate.now());
-////        return reviewService.uploadFile(multipartFile, review, resource, request);
-//        return RespondResult.error("失败", 400);
-//    }
-
-    @PostMapping(value = "/upload",produces = "application/json;charset=utf-8")
-    public ResponseEntity upload(@RequestParam("multipartFile") MultipartFile multipartFile,
-                                 @RequestParam("resource") String resource,
-                                 @RequestParam("review") String review,
-                                 HttpServletRequest request){
-//        System.out.println("sdsfgdasfdvfvfv");
+    @RequestMapping("/addreview")
+    public ResponseEntity addreview(@RequestParam("resource") Resource resource,
+                                    @RequestParam("review") Review review) {
         resource.setStatus(0);
         review.setStatus(0);
         resource.setUptime(LocalDate.now());
         resource.setUptime(LocalDate.now());
-        return reviewService.uploadFile(multipartFile, review, resource,request);
-//        return RespondResult.error("失败lll", 555);
+        return reviewService.addreview(resource, review);
     }
-
 }
