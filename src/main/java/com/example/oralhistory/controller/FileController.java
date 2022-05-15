@@ -3,6 +3,7 @@ package com.example.oralhistory.controller;
 import com.example.oralhistory.entity.RespondResult;
 import com.example.oralhistory.utils.FileUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +21,9 @@ import java.io.File;
  */
 @RestController
 public class FileController {
-    @RequestMapping("/uploadfile")
+    @RequestMapping("/uploadfile/{isarticle}")
     public ResponseEntity uploadfile(@RequestParam MultipartFile file,
-                                     @RequestParam Boolean isarticle,
+                                     @PathVariable Boolean isarticle,
                                      HttpServletRequest request) {
 
         //设置文件上传保存文件路径：保存在项目运行目录下的uploadFile文件夹
