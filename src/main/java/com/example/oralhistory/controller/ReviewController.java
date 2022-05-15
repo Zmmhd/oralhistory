@@ -94,16 +94,13 @@ public class ReviewController {
      * 注意传过来的两个实体要满足下列条件
      *
      * @param resource 不需要字段id、status、uptime
-     * @param review   不需要的字段id、status、uptime、resourceid、
      * @return
      */
     @RequestMapping("/addreview")
-    public ResponseEntity addreview(@RequestParam("resource") Resource resource,
-                                    @RequestParam("review") Review review) {
+    public ResponseEntity addreview(@RequestParam("resource") Resource resource) {
         resource.setStatus(0);
-        review.setStatus(0);
         resource.setUptime(LocalDate.now());
         resource.setUptime(LocalDate.now());
-        return reviewService.addreview(resource, review);
+        return reviewService.addreview(resource);
     }
 }

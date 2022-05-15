@@ -10,6 +10,7 @@ import com.example.oralhistory.mapper.ReviewMapper;
 import com.example.oralhistory.utils.FileUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -119,9 +120,13 @@ public class ReviewService {
     }
 
     @Transactional
-    public ResponseEntity addreview(Resource resource, Review review) {
+    public ResponseEntity addreview(Resource resource) {
         try {
+            Review review = new Review();
             resourceMapper.insert(resource);
+
+            BeanUtils.copyProperties(resource,review);
+
             //获得resource的id
             review.setResourceid(resourceMapper.selectOne(new QueryWrapper<Resource>().eq("url", resource.getUrl())).getId());
 
