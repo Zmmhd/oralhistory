@@ -71,8 +71,8 @@ export default {
         }
       }).then(res => {
         console.log(res);
-        this.tableData = res.list;
-        this.total = res.total;
+        this.tableData = res.data.list;
+        this.total = res.data.total;
       })
     },
     handleSizeChange(pageSize) {

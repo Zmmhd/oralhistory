@@ -76,7 +76,7 @@ export default {
         }
       }).then(res => {
         // console.log(res);
-        for (let i of res.list) {
+        for (let i of res.data.list) {
           if (i.type === 1) {
             i.type = "文章"
           } else if (i.type === 2) {
@@ -85,10 +85,8 @@ export default {
             i.type = "音频"
           }
         }
-        this.tableData = res.list;
-        this.total = res.total;
-        this.pageNum = res.pageNum;
-        this.pageSize = res.pageSize;
+        this.tableData = res.data.list;
+        this.total = res.data.total;
       })
     },
     handleSizeChange(pageSize) {
@@ -102,7 +100,7 @@ export default {
     getAllTheme() {
       request.get("/resource/getClassification/" + "theme").then(res => {
         console.log(res);
-        this.allTheme = res;
+        this.allTheme = res.data;
       })
     },
     changeTheme(t){

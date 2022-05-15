@@ -42,7 +42,7 @@
     </div>
 
     <div v-if="isNone === false" class="somethingFound">
-      <el-table :data="tableData" style="width: 100%; cursor: pointer;" @row-click="">
+      <el-table :data="tableData" style="width: 100%; cursor: pointer;" @row-click="rowClick">
         <el-table-column prop="title" label="标题"/>
         <el-table-column label="类型">
           <template #default="scope">
@@ -125,7 +125,7 @@ export default {
         }
       }).then(res => {
         console.log(res);
-        for (let i of res.list) {
+        for (let i of res.data.list) {
           if (i.type === 1) {
             i.type = "文章"
           } else if (i.type === 2) {
@@ -134,10 +134,8 @@ export default {
             i.type = "音频"
           }
         }
-        this.tableData = res.list;
-        this.total = res.total;
-        this.pageNum = res.pageNum;
-        this.pageSize = res.pageSize;
+        this.tableData = res.data.list;
+        this.total = res.data.total;
         this.isNone = this.total === 0 ? true : false;
         this.province = this.province === "" ? "全部省份" : this.province;
         this.theme = this.theme === "" ? "全部主题曲" : this.theme;
@@ -146,13 +144,13 @@ export default {
     getAllProvince() {
       request.get("/resource/getClassification/" + "province").then(res => {
         console.log(res);
-        this.allProvince = res;
+        this.allProvince = res.data;
       })
     },
     getAllTheme() {
       request.get("/resource/getClassification/" + "theme").then(res => {
         console.log(res);
-        this.allTheme = res;
+        this.allTheme = res.data;
       })
     },
     handleSizeChange(pageSize) {
@@ -178,6 +176,19 @@ export default {
       this.theme = t;
       this.load();
     },
+    rowClick(row, event, column) {
+      // 以下内容需要往下一个路由传
+      sessionStorage.setItem("currentId", row.id); // 当前资源id
+      sessionStorage.setItem("currentSort", "/searchResult"); // 当前路由
+      sessionStorage.setItem("currentUrl", row.url); // 当前资源的url
+      if (row.type === "文章") {
+        this.$router.push("/articleResource");
+      } else if (row.type === "视频") {
+        this.$router.push("/videoResource");
+      } else if (row.type === "音频") {
+        this.$router.push("/audioResource");
+      }
+    }
   }
 }
 </script>
