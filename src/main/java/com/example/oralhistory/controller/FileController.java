@@ -23,15 +23,11 @@ import java.io.File;
 public class FileController {
     @RequestMapping("/uploadfile/{isarticle}")
     public ResponseEntity uploadfile(@RequestParam MultipartFile file,
-                                     @PathVariable Boolean isarticle,
                                      HttpServletRequest request) {
 
         //设置文件上传保存文件路径：保存在项目运行目录下的uploadFile文件夹
         String savepath = request.getSession().getServletContext().getRealPath("/uploadFile/");
 
-        if (isarticle == true) {
-            savepath += "article" + File.separator;
-        }
 
         String url = null;
         try {
