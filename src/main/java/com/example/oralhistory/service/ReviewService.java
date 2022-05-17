@@ -106,6 +106,9 @@ public class ReviewService {
 
         // 删除url对应的文件
         Resource resource = resourceMapper.selectById(review.getResourceid());
+        if(resource==null){
+            return RespondResult.error("没有这个资源，资源id错误",400);
+        }
         try {
             String path = request.getSession().getServletContext().getRealPath("/uploadFile/") + FileUtils.getType(resource.getType());
             FileUtils.deleteFile(resource.getUrl(), path);
