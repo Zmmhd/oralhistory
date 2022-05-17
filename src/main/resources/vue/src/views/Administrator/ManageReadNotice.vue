@@ -30,7 +30,7 @@ export default {
   data(){
     return{
       currentId: sessionStorage.getItem("currentId"),
-      url: baseUrl.BASE_URL + "/notice/" + sessionStorage.getItem("currentUrl"),
+      url: baseUrl.BASE_URL + "notice/" + sessionStorage.getItem("currentUrl"),
 
       currentTitle: sessionStorage.getItem("currentTitle"),
       currentUptime: sessionStorage.getItem("currentUptime"),
