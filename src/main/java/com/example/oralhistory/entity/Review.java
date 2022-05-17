@@ -26,6 +26,7 @@ public class Review implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+    private Integer type;
     private Integer status;
     private Integer resourceid;
     private String title;
