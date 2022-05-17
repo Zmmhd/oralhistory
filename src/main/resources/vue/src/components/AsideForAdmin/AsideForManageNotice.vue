@@ -12,16 +12,30 @@
       </el-icon>
       建设进程动态
     </el-menu-item>
+    <el-menu-item index="/managePrinciple">
+      <el-icon>
+        <GobletSquareFull/>
+      </el-icon>
+      口述规范
+    </el-menu-item>
+    <el-menu-item index="/addNotice">
+      <el-icon>
+        <ForkSpoon/>
+      </el-icon>
+      新增通知
+    </el-menu-item>
   </el-menu>
 </template>
 
 <script>
-import {IceCream, IceDrink} from '@element-plus/icons-vue'
+import {IceCream, IceDrink, GobletSquareFull, ForkSpoon} from '@element-plus/icons-vue'
 export default {
   name: "AsideForManageNotice",
   components: {
     IceCream,
-    IceDrink
+    IceDrink,
+    GobletSquareFull,
+    ForkSpoon
   }
 }
 </script>

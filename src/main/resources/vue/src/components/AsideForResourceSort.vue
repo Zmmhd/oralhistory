@@ -16,7 +16,7 @@
       <el-icon>
         <Chicken/>
       </el-icon>
-      主题曲
+      主题
     </el-menu-item>
   </el-menu>
 </template>

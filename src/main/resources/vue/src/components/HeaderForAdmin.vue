@@ -19,6 +19,8 @@
         <template #title>通知管理</template>
         <el-menu-item index="/manageRaiseNotice">征集公告</el-menu-item>
         <el-menu-item index="/manageMomentsNotice">建设进程动态</el-menu-item>
+        <el-menu-item index="/managePrinciple">口述规范</el-menu-item>
+        <el-menu-item index="/addNotice">新增通知</el-menu-item>
       </el-sub-menu>
 
       <div style="margin: auto 20px auto 800px;">

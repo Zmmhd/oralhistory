@@ -19,15 +19,18 @@
         <template #title>资源分类</template>
         <el-menu-item index="/sortByType">资源类型</el-menu-item>
         <el-menu-item index="/sortByProvince">省份</el-menu-item>
-        <el-menu-item index="/sortByTheme">主题曲</el-menu-item>
+        <el-menu-item index="/sortByTheme">主题</el-menu-item>
       </el-sub-menu>
       <el-sub-menu index="/notice">
         <template #title>口述动态</template>
         <el-menu-item index="/raiseNotice">征集公告</el-menu-item>
         <el-menu-item index="/momentsNotice">建设进程动态</el-menu-item>
       </el-sub-menu>
-      <el-menu-item index="/principle">口述规范</el-menu-item>
-      <el-sub-menu index="/themeRelative">
+      <el-sub-menu index="/principle">
+        <template #title>口述规范</template>
+        <el-menu-item index="/principleList">口述规范</el-menu-item>
+      </el-sub-menu>
+      <el-sub-menu index="/knowledgePicture">
         <template #title>知识图谱</template>
         <el-menu-item index="/themeRelative">省级综合档案馆口述例使档案资源建设主题相关性</el-menu-item>
         <el-menu-item index="/WechatTypeRelative">省级综合档案馆微信公众平台口述历史档案资源类型相关性</el-menu-item>

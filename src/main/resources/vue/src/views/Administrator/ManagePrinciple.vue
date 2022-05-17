@@ -40,7 +40,7 @@ import request from "@/utils/request";
 import {ElMessage, ElMessageBox} from 'element-plus'
 
 export default {
-  name: "ManageMomentsNotice",
+  name: "ManagePrinciple",
   components: {
     Timer
   },
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     load() {
-      request.get("/notice/getbytype/" + 2, {
+      request.get("/notice/getbytype/" + 3, {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize
@@ -79,7 +79,7 @@ export default {
     rowClick(row, event, column) {
       // 以下内容需要往下一个路由传
       sessionStorage.setItem("currentId", row.id); // 当前通知id
-      sessionStorage.setItem("currentSort", "/manageMomentsNotice"); // 当前路由
+      sessionStorage.setItem("currentSort", "/managePrinciple"); // 当前路由
       sessionStorage.setItem("currentUrl", row.url); // 当前通知的url
 
       sessionStorage.setItem("currentTitle", row.title);
@@ -89,7 +89,7 @@ export default {
     },
     handleDelete(row) {
       ElMessageBox.confirm(
-          '确定要删除这条通知吗？',
+          '确定要删除这则口述规范吗？',
           '警告',
           {
             confirmButtonText: '确认',

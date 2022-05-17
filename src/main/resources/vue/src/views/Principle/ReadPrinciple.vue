@@ -21,7 +21,7 @@ import baseUrl from "@/assets/Config";
 import request from "@/utils/request";
 
 export default {
-  name: "ManageReadNotice",
+  name: "ReadPrinciple",
   created() {
     console.log(typeof this.currentId);
     console.log(this.currentId);
@@ -30,7 +30,7 @@ export default {
   data(){
     return{
       currentId: sessionStorage.getItem("currentId"),
-      url: baseUrl.BASE_URL + "/notice/" + sessionStorage.getItem("currentUrl"),
+      url: baseUrl.BASE_URL + sessionStorage.getItem("currentUrl"),
 
       currentTitle: sessionStorage.getItem("currentTitle"),
       currentUptime: sessionStorage.getItem("currentUptime"),

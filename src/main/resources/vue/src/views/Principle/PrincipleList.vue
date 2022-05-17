@@ -1,5 +1,6 @@
 <template>
   <div style="margin: 10px;">
+
     <el-table :data="tableData" style="width: 100%; cursor: pointer;" @row-click="rowClick">
       <el-table-column prop="title" label="标题"/>
 
@@ -11,12 +12,6 @@
             </el-icon>
             <span style="margin-left: 10px">{{ scope.row.uptime }}</span>
           </div>
-        </template>
-      </el-table-column>
-
-      <el-table-column fixed="right" label="操作" width="120">
-        <template #default="scope">
-          <el-button type="text" size="small" @click.native.stop="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -37,10 +32,9 @@
 <script>
 import {Timer} from '@element-plus/icons-vue'
 import request from "@/utils/request";
-import {ElMessage, ElMessageBox} from 'element-plus'
 
 export default {
-  name: "ManageMomentsNotice",
+  name: "PrincipleList",
   components: {
     Timer
   },
@@ -57,7 +51,7 @@ export default {
   },
   methods: {
     load() {
-      request.get("/notice/getbytype/" + 2, {
+      request.get("/notice/getbytype/" + 3, {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize
@@ -79,39 +73,11 @@ export default {
     rowClick(row, event, column) {
       // 以下内容需要往下一个路由传
       sessionStorage.setItem("currentId", row.id); // 当前通知id
-      sessionStorage.setItem("currentSort", "/manageMomentsNotice"); // 当前路由
+      sessionStorage.setItem("currentSort", "/principleList"); // 当前路由
       sessionStorage.setItem("currentUrl", row.url); // 当前通知的url
-
       sessionStorage.setItem("currentTitle", row.title);
       sessionStorage.setItem("currentUptime", row.uptime);
-
-      this.$router.push("/manageReadNotice");
-    },
-    handleDelete(row) {
-      ElMessageBox.confirm(
-          '确定要删除这条通知吗？',
-          '警告',
-          {
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            type: 'warning',
-          }
-      ).then(() => {
-        console.log(row);
-        request.delete("/notice/delete/" + row.id).then(res => {
-          console.log(res);
-          this.load();
-          ElMessage({
-            type: 'success',
-            message: '删除成功',
-          })
-        });
-      }).catch(() => {
-        ElMessage({
-          type: 'info',
-          message: '再考虑一下吧',
-        })
-      })
+      this.$router.push("/readPrinciple");
     }
   }
 }

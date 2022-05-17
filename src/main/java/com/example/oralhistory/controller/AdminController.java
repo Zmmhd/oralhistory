@@ -27,12 +27,12 @@ public class AdminController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestParam String name,
-                                @RequestParam String passowrd){
+                                @RequestParam String password){
         Admin admin = adminMapper.selectOne(new QueryWrapper<Admin>().eq("name", name));
         if (admin == null){
             return RespondResult.error("没有该管理员",400);
         }
-        if (!passowrd.equals(admin.getPassword())){
+        if (!password.equals(admin.getPassword())){
             return  RespondResult.error("密码错误",400);
         }
         return RespondResult.success("登录成功");

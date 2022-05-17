@@ -17,15 +17,74 @@
         </div>
         <div class="teleport">
           <li @click="$router.push('/principle')">口述规范</li>
+          <li @click="login">管理员登录</li>
         </div>
       </div>
     </div>
   </div>
+
+  <el-dialog v-model="dialogVisible" title="管理员登陆" width="30%">
+    <el-form :model="form" label-width="120px" ref="form" :rules="rules">
+      <el-form-item label="用户名">
+        <el-input v-model="form.name" style="width: 80%;"/>
+      </el-form-item>
+      <el-form-item label="密码">
+        <el-input type="password" v-model="form.password" style="width: 80%;"/>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span>
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="info" @click="save">确 定</el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script>
+import request from "@/utils/request";
+
 export default {
-  name: "Bottom"
+  name: "Bottom",
+  data() {
+    return {
+      form: {},
+      dialogVisible: false,
+      rules: {
+        name: [
+          {required: true, message: '请输入用户名', trigger: 'blur'},
+        ],
+        password: [
+          {required: true, message: '请输入密码', trigger: 'blur'},
+        ]
+      }
+    }
+  },
+  methods: {
+    login() {
+      this.form = {};
+      this.dialogVisible = true;
+    },
+    save() {
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          let userInfo = new FormData();
+          userInfo.append("name", this.form.name);
+          userInfo.append("password", this.form.password);
+          request.post("/admin/login", userInfo).then(res => {
+            console.log(res);
+            console.log(res.data);
+            if (res.data === "登录成功") {
+              this.$message.success("欢迎你，管理员");
+              this.$router.push("/admin");
+            } else {
+              this.$message.error("用户名或密码错误");
+            }
+          })
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -66,7 +125,7 @@ export default {
   transition: all 0.3s;
 }
 
-.teleport li:hover{
+.teleport li:hover {
   color: #f05053;
   cursor: pointer;
 }

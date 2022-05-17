@@ -24,7 +24,7 @@
     </div>
 
     <div style="margin: 5px 0;">
-      <el-tag style="margin: 5px; cursor: pointer;" type="warning" @click="changeTheme('');">全部主题曲</el-tag>
+      <el-tag style="margin: 5px; cursor: pointer;" type="warning" @click="changeTheme('');">全部主题</el-tag>
       <el-tag style="margin: 5px; cursor: pointer;" v-for="t in allTheme" type="warning" @click="changeTheme(t);">
         {{ t }}
       </el-tag>
@@ -33,7 +33,7 @@
     <div class="condition"><span style="font-weight: bolder;">当前筛选条件：</span>
       类型：<span style="color :#ccc;">{{ allType[type] }}&nbsp;&nbsp;</span>
       省份：<span style="color :#ccc;">{{ province }}&nbsp;&nbsp;</span>
-      主题曲：<span style="color :#ccc;">{{ theme }}&nbsp;&nbsp;</span>
+      主题：<span style="color :#ccc;">{{ theme }}&nbsp;&nbsp;</span>
     </div>
 
     <div v-if="isNone === true" class="nothingFound">
@@ -54,7 +54,7 @@
             <el-tag type="success">{{ scope.row.province }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="主题曲">
+        <el-table-column label="主题">
           <template #default="scope">
             <el-tag type="warning">{{ scope.row.theme }}</el-tag>
           </template>
@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     load() {
-      if (this.theme === "全部主题曲") {
+      if (this.theme === "全部主题") {
         this.theme = "";
       }
       if (this.province === "全部省份") {
@@ -138,7 +138,7 @@ export default {
         this.total = res.data.total;
         this.isNone = this.total === 0 ? true : false;
         this.province = this.province === "" ? "全部省份" : this.province;
-        this.theme = this.theme === "" ? "全部主题曲" : this.theme;
+        this.theme = this.theme === "" ? "全部主题" : this.theme;
       })
     },
     getAllProvince() {

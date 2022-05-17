@@ -22,7 +22,7 @@
           <el-tag type="success">{{ scope.row.province }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="主题曲">
+      <el-table-column label="主题">
         <template #default="scope">
           <el-tag type="warning">{{ scope.row.theme }}</el-tag>
         </template>
@@ -109,9 +109,17 @@ export default {
     },
     rowClick(row, event, column) {
       // 以下内容需要往下一个路由传
+      console.log(row);
       sessionStorage.setItem("currentId", row.id); // 当前资源id
       sessionStorage.setItem("currentSort", "/sortByTheme"); // 当前路由
       sessionStorage.setItem("currentUrl", row.url); // 当前资源的url
+
+      sessionStorage.setItem("currentTitle", row.title);
+      sessionStorage.setItem("currentSynopsis", row.synopsis);
+      sessionStorage.setItem("currentUptime", row.uptime);
+      sessionStorage.setItem("currentProvince", row.province);
+      sessionStorage.setItem("currentTheme", row.theme);
+
       if (row.type === "文章") {
         this.$router.push("/articleResource");
       } else if (row.type === "视频") {
