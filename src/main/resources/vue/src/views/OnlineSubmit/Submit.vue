@@ -57,9 +57,10 @@
             v-if="isDisabled === false"
             ref="upload"
             :show-file-list="false"
-            action="http://localhost:8888/uploadfile"
+            action="#"
             :on-change="handleSelectFile"
-            :on-success="fileUploadSuccess">
+            :auto-upload="false"
+            :http-request="overSubmit">
           <el-button type="info">点击上传文件</el-button>
 <!--          <template #tip>-->
 <!--            <div>-->
@@ -68,6 +69,7 @@
 <!--          </template>-->
         </el-upload>
         <span v-if="isDisabled === true" style="font-weight: 600; user-select: none;">请先选择文件类型后再上传</span>
+        <span v-if="hasFile === true" style="font-weight: 600; user-select: none; margin: 0 10px;">您的文件符合要求，待上传</span>
       </el-form-item>
       <el-button @click="save" type="info">提 交</el-button>
     </el-form>
@@ -151,7 +153,6 @@ export default {
     //     "upernumber": this.form.upernumber
     //   };
     //   data.append('review', JSON.stringify(review));
-    //   console.log("fsdfdsfsfdsfsdfd")
     //   request.post("/review/upload", data).then(res => {
     //     console.log(res);
     //   })
@@ -162,9 +163,6 @@ export default {
 
     radioChange(){
       this.isDisabled = false;
-    },
-    fileUploadSuccess(response) {
-      this.currentUrl = response.data;
     },
     handleSelectFile(file, fileList) {
       // 保证文件列表内只有一个文件
@@ -182,7 +180,6 @@ export default {
         if (whiteList.indexOf(fileSuffix) === -1) {
           this.$message.error('上传文件只能是doc,docx格式');
           this.hasFile = false;
-          this.$refs.upload.clearFiles();
           return;
         }
       } else if (this.form.type === '2') {
@@ -190,7 +187,6 @@ export default {
         if (whiteList.indexOf(fileSuffix) === -1) {
           this.$message.error('上传文件只能是mp4格式');
           this.hasFile = false;
-          this.$refs.upload.clearFiles();
           return;
         }
       } else if (this.form.type === '3') {
@@ -198,7 +194,6 @@ export default {
         if (whiteList.indexOf(fileSuffix) === -1) {
           this.$message.error('上传文件只能是mp3格式');
           this.hasFile = false;
-          this.$refs.upload.clearFiles();
           return;
         }
       }
@@ -211,31 +206,42 @@ export default {
       //   return;
       // }
     },
+
+    overSubmit(params) {
+      console.log("正在上传。。。")
+      const formData = new FormData()
+      formData.append('file', params.file)
+      request.post("/uploadfile", formData).then(res => {
+        console.log(res);
+        this.currentUrl = res.data;
+        let resource = {
+          "type": this.form.type,
+          "url": this.currentUrl,
+          "title": this.form.title,
+          "synopsis": this.form.synopsis,
+          "province": this.form.province,
+          "archives": this.form.archives,
+          "theme": this.form.theme,
+          "upercity": this.form.upercity,
+          "upername": this.form.upername,
+          "upernumber": this.form.upernumber
+        };
+        console.log("resource", resource);
+        request.post("/review/addreview", resource).then(res => {
+          console.log(res)
+          this.$message({
+            type: 'success',
+            message: "新增成功，请等待审核"
+          })
+        });
+      })
+    },
+
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           if(this.hasFile === true){
             this.$refs.upload.submit();
-            let resource = {
-              "type": this.form.type,
-              "url": this.currentUrl,
-              "title": this.form.title,
-              "synopsis": this.form.synopsis,
-              "province": this.form.province,
-              "archives": this.form.archives,
-              "theme": this.form.theme,
-              "upercity": this.form.upercity,
-              "upername": this.form.upername,
-              "upernumber": this.form.upernumber
-            };
-            console.log(resource);
-            request.post("/review/addreview", resource).then(res => {
-              console.log(res)
-              this.$message({
-                type: 'success',
-                message: "新增成功，请等待审核"
-              })
-            });
           } else{
             this.$message.error("请先上传合适的文件")
           }

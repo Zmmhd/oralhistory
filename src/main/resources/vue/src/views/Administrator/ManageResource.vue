@@ -1,16 +1,16 @@
 <template>
-<div style="margin: 10px;">
-  <div style="margin: 10px 0;">
-    <el-input v-model="search" placeholder="请输入关键字" style="width: 30%;" clearable/>
-    <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
-<!--    <el-select v-model="selectStatus" style="margin-left: 400px;" @change="load">-->
-<!--      <el-option label="待审核" :value="0"></el-option>-->
-<!--      <el-option label="审核通过" :value="1"></el-option>-->
-<!--      <el-option label="审核不通过" :value="-1"></el-option>-->
-<!--    </el-select>-->
-  </div>
+  <div style="margin: 10px;">
+    <div style="margin: 10px 0;">
+      <el-input v-model="search" placeholder="请输入关键字" style="width: 30%;" clearable/>
+      <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
+      <!--    <el-select v-model="selectStatus" style="margin-left: 400px;" @change="load">-->
+      <!--      <el-option label="待审核" :value="0"></el-option>-->
+      <!--      <el-option label="审核通过" :value="1"></el-option>-->
+      <!--      <el-option label="审核不通过" :value="-1"></el-option>-->
+      <!--    </el-select>-->
+    </div>
 
-    <el-table :data="tableData" style="width: 100%;" @row-click="rowClick">
+    <el-table :data="tableData" style="width: 100%; user-select: none;" @row-click="rowClick">
       <el-table-column prop="title" label="标题"/>
       <el-table-column prop="upernumber" label="上传者手机号"/>
       <el-table-column prop="synopsis" label="简介"/>
@@ -46,14 +46,46 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
     />
-</div>
+
+    <el-dialog v-model="dialogVisible" title="新增学生" width="30%">
+      <el-form :model="form" label-width="120px">
+        <el-form-item label="标题">
+          <el-input v-model="form.title" style="width: 80%;" readonly/>
+        </el-form-item>
+        <el-form-item label="上传者手机号">
+          <el-input v-model="form.upernumber" style="width: 80%;" readonly/>
+        </el-form-item>
+        <el-form-item label="简介">
+          <el-input type="textarea" style="width: 80%;" v-model="form.synopsis" :autosize="{ minRows: 2, maxRows: 4 }"
+                    maxlength="50" show-word-limit readonly/>
+        </el-form-item>
+        <el-form-item label="上传时间">
+          <el-input v-model="form.uptime" style="width: 80%;" readonly/>
+        </el-form-item>
+        <el-form-item label="更改审核状态">
+          <el-radio v-model="form.status" :label="1">通过</el-radio>
+          <el-radio v-model="form.status" :label="-1">不通过</el-radio>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+      <span>
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="info" @click="save">确 定</el-button>
+      </span>
+      </template>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
+import {Timer} from '@element-plus/icons-vue'
 import request from "@/utils/request";
 
 export default {
   name: "ManageResource",
+  components: {
+    Timer
+  },
   data() {
     return {
       tableData: [],
@@ -62,6 +94,8 @@ export default {
       pageNum: 1,
       pageSize: 10,
       total: 0,
+      dialogVisible: false,
+      form: {}
     }
   },
   created() {
@@ -97,11 +131,26 @@ export default {
       this.pageNum = pageNum
       this.load()
     },
-    handleEdit(row){
+    handleEdit(row) {
+      this.form = JSON.parse(JSON.stringify(row));
+      this.dialogVisible = true;
+    },
+    rowClick() {
 
     },
-    rowClick(){
-
+    save() {
+      console.log("this.form.id: ", this.form.id)
+      console.log("this.form.status", this.form.status)
+      let formData = new FormData();
+      formData.append('status', this.form.status);
+      // for (let key of formData.keys()) {
+      //   console.log("key:" + key + " value:" + formData.get(key));
+      // }
+      request.put("/review/update/" + this.form.id, formData).then(res => {
+        console.log(res);
+        this.$message.success("更新成功");
+        this.dialogVisible = false;
+      });
     }
   }
 }
