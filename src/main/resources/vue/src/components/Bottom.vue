@@ -24,20 +24,18 @@
   </div>
 
   <el-dialog v-model="dialogVisible" title="管理员登陆" width="30%">
-    <el-form :model="form" label-width="120px" ref="form" :rules="rules">
+    <el-form :model="form" label-width="120px">
       <el-form-item label="用户名">
         <el-input v-model="form.name" style="width: 80%;"/>
       </el-form-item>
       <el-form-item label="密码">
         <el-input type="password" v-model="form.password" style="width: 80%;"/>
       </el-form-item>
-    </el-form>
-    <template #footer>
-      <span>
+      <div style="display:flex; justify-content: center; align-items: center;">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="info" @click="save">确 定</el-button>
-      </span>
-    </template>
+      </div>
+    </el-form>
   </el-dialog>
 </template>
 
@@ -49,15 +47,7 @@ export default {
   data() {
     return {
       form: {},
-      dialogVisible: false,
-      rules: {
-        name: [
-          {required: true, message: '请输入用户名', trigger: 'blur'},
-        ],
-        password: [
-          {required: true, message: '请输入密码', trigger: 'blur'},
-        ]
-      }
+      dialogVisible: false
     }
   },
   methods: {
@@ -66,23 +56,27 @@ export default {
       this.dialogVisible = true;
     },
     save() {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          let userInfo = new FormData();
-          userInfo.append("name", this.form.name);
-          userInfo.append("password", this.form.password);
-          request.post("/admin/login", userInfo).then(res => {
-            console.log(res);
-            console.log(res.data);
-            if (res.data === "登录成功") {
-              this.$message.success("欢迎你，管理员");
-              this.$router.push("/admin");
-            } else {
-              this.$message.error("用户名或密码错误");
-            }
-          })
-        }
-      })
+      console.log(this.form.name, this.form.password)
+      if (!this.form.name || !this.form.password) {
+        this.$message.error("请输入用户名和密码")
+      } else {
+        let userInfo = new FormData();
+        userInfo.append("name", this.form.name);
+        userInfo.append("password", this.form.password);
+        request.post("/admin/login", userInfo).then(res => {
+          console.log(res);
+          console.log(res.data);
+          if (res.data === "登录成功") {
+            this.$message.success("欢迎你，管理员");
+            this.$router.push("/admin");
+          }
+        }).catch(res => {
+          console.log(res)
+          if(res.response.status === 400){
+            this.$message.error("用户名或密码错误");
+          }
+        })
+      }
     }
   }
 }
