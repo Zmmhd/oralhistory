@@ -1,9 +1,5 @@
 <template>
   <div style="margin: 10px;">
-    <div style="margin-bottom: 10px;">
-      <el-button type="info" @click="add">新增公告</el-button>
-    </div>
-
     <el-table :data="tableData" style="width: 100%; cursor: pointer;" @row-click="rowClick">
       <el-table-column prop="title" label="标题"/>
 
@@ -20,11 +16,7 @@
 
       <el-table-column fixed="right" label="操作" width="120">
         <template #default="scope">
-          <el-popconfirm title="确定删除此公告吗？" @confirm="handleDelete(scope.row)">
-            <template #reference>
-              <el-button type="text" size="small">删除</el-button>
-            </template>
-          </el-popconfirm>
+          <el-button type="text" size="small" @click.native.stop="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -45,6 +37,7 @@
 <script>
 import {Timer} from '@element-plus/icons-vue'
 import request from "@/utils/request";
+import {ElMessage, ElMessageBox} from 'element-plus'
 
 export default {
   name: "ManageRaiseNotice",
@@ -91,10 +84,25 @@ export default {
       this.$router.push("/manageReadNotice");
     },
     handleDelete(row) {
-
-    },
-    add() {
-
+      ElMessageBox.confirm(
+          '确定要删除这条通知吗？',
+          '警告',
+          {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning',
+          }
+      ).then(() => {
+        ElMessage({
+          type: 'success',
+          message: '删除成功',
+        })
+      }).catch(() => {
+        ElMessage({
+          type: 'info',
+          message: '再考虑一下吧',
+        })
+      })
     }
   }
 }

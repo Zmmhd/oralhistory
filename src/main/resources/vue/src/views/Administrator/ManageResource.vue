@@ -1,16 +1,16 @@
 <template>
   <div style="margin: 10px;">
-    <div style="margin: 10px 0;">
-      <el-input v-model="search" placeholder="请输入关键字" style="width: 30%;" clearable/>
-      <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>
-      <!--    <el-select v-model="selectStatus" style="margin-left: 400px;" @change="load">-->
-      <!--      <el-option label="待审核" :value="0"></el-option>-->
-      <!--      <el-option label="审核通过" :value="1"></el-option>-->
-      <!--      <el-option label="审核不通过" :value="-1"></el-option>-->
-      <!--    </el-select>-->
-    </div>
+    <!--    <div style="margin: 10px 0;">-->
+    <!--      <el-input v-model="search" placeholder="请输入关键字" style="width: 30%;" clearable/>-->
+    <!--      <el-button type="info" style="margin-left: 5px;" @click="load">查询</el-button>-->
+    <!--          <el-select v-model="selectStatus" style="margin-left: 400px;" @change="load">-->
+    <!--            <el-option label="待审核" :value="0"></el-option>-->
+    <!--            <el-option label="审核通过" :value="1"></el-option>-->
+    <!--            <el-option label="审核不通过" :value="-1"></el-option>-->
+    <!--          </el-select>-->
+    <!--    </div>-->
 
-    <el-table :data="tableData" style="width: 100%; user-select: none;" @row-click="rowClick">
+    <el-table :data="tableData" style="width: 100%; cursor: pointer;" @row-click="rowClick">
       <el-table-column prop="title" label="标题"/>
       <el-table-column prop="upernumber" label="上传者手机号"/>
       <el-table-column prop="synopsis" label="简介"/>
@@ -31,7 +31,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="120">
         <template #default="scope">
-          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button type="text" size="small" @click.native.stop="handleEdit(scope.row)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -47,7 +47,7 @@
         @current-change="handleCurrentChange"
     />
 
-    <el-dialog v-model="dialogVisible" title="新增学生" width="30%">
+    <el-dialog v-model="dialogVisible" title="审核管理" width="30%">
       <el-form :model="form" label-width="120px">
         <el-form-item label="标题">
           <el-input v-model="form.title" style="width: 80%;" readonly/>
@@ -89,7 +89,7 @@ export default {
   data() {
     return {
       tableData: [],
-      search: "",
+      // search: "",
       selectStatus: 0,
       pageNum: 1,
       pageSize: 10,
@@ -135,8 +135,34 @@ export default {
       this.form = JSON.parse(JSON.stringify(row));
       this.dialogVisible = true;
     },
-    rowClick() {
+    rowClick(row, column, cell, event) {
+      console.log(row, column, cell, event)
+      console.log()
+      // 以下内容需要往下一个路由传
+      console.log(row);
+      // 发个post拿一下当前资源的url
+      let formData = new FormData();
+      formData.append("resourceId", row.resourceid);
+      request.post("/resource/getbyid", formData).then(res => {
+        console.log(res);
+        sessionStorage.setItem("currentId", row.id); // 当前资源id
+        sessionStorage.setItem("currentSort", "/manageResource"); // 当前路由
+        sessionStorage.setItem("currentUrl", res.data.url); // 当前资源的url
 
+        sessionStorage.setItem("currentTitle", row.title);
+        sessionStorage.setItem("currentUpernumber", row.upernumber);
+        sessionStorage.setItem("currentSynopsis", row.synopsis);
+        sessionStorage.setItem("currentUptime", row.uptime);
+        sessionStorage.setItem("currentStatus", 0);
+
+        if (res.data.type === 1) {
+          this.$router.push("/manageRead");
+        } else if (res.data.type === 2) {
+          this.$router.push("/manageWatch");
+        } else if (res.data.type === 3) {
+          this.$router.push("/manageListen");
+        }
+      });
     },
     save() {
       console.log("this.form.id: ", this.form.id)

@@ -28,6 +28,9 @@ import ArticleResource from "@/views/ResourceSort/ArticleResource";
 import ReadNotice from "@/views/Notice/ReadNotice";
 import ManageReadNotice from "@/views/Administrator/ManageReadNotice";
 import SearchResult from "@/views/MainPage/SearchResult";
+import ManageRead from "@/views/Administrator/ManageRead";
+import ManageListen from "@/views/Administrator/ManageListen";
+import ManageWatch from "@/views/Administrator/ManageWatch";
 
 const routes = [
   {
@@ -166,6 +169,21 @@ const routes = [
         path: '/manageResource',
         name: 'ManageResource',
         component: ManageResource,
+      },
+      {
+        path: '/manageRead',
+        name: 'ManageRead',
+        component: ManageRead,
+      },
+      {
+        path: '/manageListen',
+        name: 'ManageListen',
+        component: ManageListen,
+      },
+      {
+        path: '/manageWatch',
+        name: 'ManageWatch',
+        component: ManageWatch,
       },
       {
         path: '/manageNotice',
