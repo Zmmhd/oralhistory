@@ -107,12 +107,12 @@ public class ResourceController {
         }
     }
 
-    @RequestMapping("/geturl")
+    @RequestMapping("/getbyid")
     public ResponseEntity getUrl(@RequestParam Integer resourceId){
         Resource resource = resourceMapper.selectById(resourceId);
         if (resource == null){
             return RespondResult.error("没有这个资源",400);
         }
-        return RespondResult.success(resource.getUrl());
+        return RespondResult.success(resource);
     }
 }
