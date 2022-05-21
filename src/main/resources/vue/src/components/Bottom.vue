@@ -16,10 +16,20 @@
           <li @click="$router.push('/oralMap')">口述地图</li>
         </div>
         <div class="teleport">
-          <li @click="$router.push('/principle')">口述规范</li>
+          <li @click="$router.push('/principleList')">口述规范</li>
           <li @click="login">管理员登录</li>
         </div>
       </div>
+    </div>
+
+    <div class="second-bottom-right">
+      <div class="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本网站仅限学术研究，无任何商业用途，若有任何侵权信息，请联系我们删除。</div>
+    </div>
+
+    <div class="second-bottom-about">
+      联系我们&nbsp;/&nbsp;意见反馈:<br>
+      电&nbsp;&nbsp;话:&nbsp;18362803657<br>
+      邮&nbsp;&nbsp;箱:&nbsp;cwy3314@163.com<br>
     </div>
   </div>
 
@@ -84,25 +94,23 @@ export default {
 
 <style scoped>
 .bottom {
-  background-color: #FBD786;
+  background-color: #4682B4;
   width: 100%;
   height: 120px;
-  box-shadow: 0 0px 10px 5px #FBD786;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #F0FFFF;
+  border-top: 2px solid #ffffff;
 }
 
 .second-bottom {
-  width: 80%;
+  width: 30%;
   height: 80px;
 }
 
 .teleportTitle {
   font-size: small;
-  margin-left: 20px;
-  margin-bottom: 5px;
   font-weight: 700;
   user-select: none;
 }
@@ -112,15 +120,41 @@ export default {
 }
 
 .teleport li {
-  margin: 5px 30px 5px;
-  font-size: smaller;
+  margin: 10px 10px;
+  font-size: x-small;
   list-style: none;
   user-select: none;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .teleport li:hover {
-  color: #f05053;
+  color: #ADD8E6;
   cursor: pointer;
+}
+
+.second-bottom-right {
+  padding: 20px;
+  width: 30%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: #cccccc dashed 1px;
+  border-left: #cccccc dashed 1px;
+}
+
+.right{
+  font-size: small;
+  user-select: none;
+}
+
+.second-bottom-about {
+  width: 30%;
+  height: 80px;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
 }
 </style>

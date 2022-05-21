@@ -1,5 +1,5 @@
 <template>
-  <el-menu router class="menu" text-color="#fff" active-text-color="#f05053"  default-active="/raiseNotice">
+  <el-menu router class="menu" text-color="#F0FFFF" active-text-color="#ADD8E6" default-active="/raiseNotice">
     <el-menu-item index="/raiseNotice">
       <el-icon>
         <IceCream/>
@@ -31,10 +31,10 @@ export default {
 .menu{
   width: 200px;
   min-height: 100vh;
-  background-color: #e7ac94;
+  background-color: #4682B4;
   font-weight: 700;
 }
 .el-menu-item:hover {
-  background-color: #d1806c !important;
+  background-color: #486067 !important;
 }
 </style>

@@ -45,16 +45,18 @@ export default {
   border: none;
   background: none;
   outline: none;
-  padding: 0;
+  /*padding: 0;*/
   color: #fff;
   font-size: 15px;
   line-height: 20px;
-  width: 0;
-  transition: all 0.8s;
-}
-
-.search-box:hover input, .search-box input:focus {
+  /*width: 0;*/
+  /*transition: all 0.8s;*/
   width: 150px;
   padding: 0 8px;
 }
+
+/*.search-box:hover input, .search-box input:focus {*/
+/*  width: 150px;*/
+/*  padding: 0 8px;*/
+/*}*/
 </style>

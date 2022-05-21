@@ -181,6 +181,12 @@ export default {
       sessionStorage.setItem("currentId", row.id); // 当前资源id
       sessionStorage.setItem("currentSort", "/searchResult"); // 当前路由
       sessionStorage.setItem("currentUrl", row.url); // 当前资源的url
+
+      sessionStorage.setItem("currentTitle", row.title);
+      sessionStorage.setItem("currentSynopsis", row.synopsis);
+      sessionStorage.setItem("currentUptime", row.uptime);
+      sessionStorage.setItem("currentProvince", row.province);
+      sessionStorage.setItem("currentTheme", row.theme);
       if (row.type === "文章") {
         this.$router.push("/articleResource");
       } else if (row.type === "视频") {

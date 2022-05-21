@@ -1,6 +1,6 @@
 <template>
   <div style="margin: 20px 75px;">
-    <div style="border-bottom: #f05053 dashed 1px;">
+    <div style="border-bottom: #4682B4 dashed 1px;">
       <el-button style="margin: 0 0 10px 10px;" @click="back" type="info">返回</el-button>
       <el-button style="margin: 0 10px 10px 10px;" @click="handleEdit" type="info">审核管理</el-button>
     </div>
@@ -14,7 +14,7 @@
       <div style="margin: 2px 0;">简介：<span style="color :#494241;">{{ currentSynopsis }}</span></div>
     </div>
 
-    <div style="margin: 20px; padding: 20px; border: 2px #e7ac94 solid; border-radius: 5px;">
+    <div style="margin: 20px; padding: 20px; border: 2px #4682B4 solid; border-radius: 5px;">
       <audio :src=url controls></audio>
     </div>
   </div>
