@@ -75,6 +75,10 @@ export default {
       sessionStorage.setItem("currentId", row.id); // 当前通知id
       sessionStorage.setItem("currentSort", "/raiseNotice"); // 当前路由
       sessionStorage.setItem("currentUrl", row.url); // 当前通知的url
+
+      sessionStorage.setItem("currentTitle", row.title);
+      sessionStorage.setItem("currentUptime", row.uptime);
+
       this.$router.push("/readNotice");
     }
   }

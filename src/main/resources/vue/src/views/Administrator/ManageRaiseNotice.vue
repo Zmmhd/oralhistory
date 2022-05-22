@@ -81,6 +81,10 @@ export default {
       sessionStorage.setItem("currentId", row.id); // 当前通知id
       sessionStorage.setItem("currentSort", "/manageRaiseNotice"); // 当前路由
       sessionStorage.setItem("currentUrl", row.url); // 当前通知的url
+
+      sessionStorage.setItem("currentTitle", row.title);
+      sessionStorage.setItem("currentUptime", row.uptime);
+
       this.$router.push("/manageReadNotice");
     },
     handleDelete(row) {
@@ -93,10 +97,15 @@ export default {
             type: 'warning',
           }
       ).then(() => {
-        ElMessage({
-          type: 'success',
-          message: '删除成功',
-        })
+        console.log(row);
+        request.delete("/notice/delete/" + row.id).then(res => {
+          console.log(res);
+          this.load();
+          ElMessage({
+            type: 'success',
+            message: '删除成功',
+          })
+        });
       }).catch(() => {
         ElMessage({
           type: 'info',

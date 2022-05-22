@@ -23,8 +23,8 @@
       <el-form-item label="档案馆名称" prop="archives">
         <el-input v-model="form.archives"/>
       </el-form-item>
-      <el-form-item label="主题曲" prop="theme">
-        <el-select v-model="form.theme" placeholder="--选择主题曲--">
+      <el-form-item label="主题" prop="theme">
+        <el-select v-model="form.theme" placeholder="--选择主题--">
           <el-option
               v-for="item in allTheme"
               :label="item"
@@ -109,7 +109,7 @@ export default {
           {required: true, message: '请输入档案馆', trigger: 'blur'},
         ],
         theme: [
-          {required: true, message: '请选择主题曲', trigger: 'change'},
+          {required: true, message: '请选择主题', trigger: 'change'},
         ],
         upercity: [
           {required: true, message: '请输入你所在的城市', trigger: 'blur'},

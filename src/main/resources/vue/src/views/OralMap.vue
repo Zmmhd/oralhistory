@@ -19,7 +19,7 @@ export default {
 }
 
 img{
-  border: #e7ac94 2px solid;
+  border: #4682B4 2px solid;
   margin: 20px;
   border-radius: 50px;
 }

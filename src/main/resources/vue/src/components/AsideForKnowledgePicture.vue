@@ -1,5 +1,5 @@
 <template>
-  <el-menu router class="menu" text-color="#fff" active-text-color="#f05053"  default-active="/themeRelative">
+  <el-menu router class="menu" text-color="#F0FFFF" active-text-color="#ADD8E6" default-active="/themeRelative">
     <el-menu-item index="/themeRelative">
       <el-icon>
         <MagicStick/>
@@ -36,12 +36,12 @@ export default {
 
 <style scoped>
 .menu{
-  width: 35%;
+  width: 450px;
   min-height: 100vh;
-  background-color: #e7ac94;
+  background-color: #4682B4;
   font-weight: 700;
 }
 .el-menu-item:hover {
-  background-color: #d1806c !important;
+  background-color: #486067 !important;
 }
 </style>

@@ -8,7 +8,7 @@ import SortByType from "@/views/ResourceSort/SortByType";
 import Notice from "@/views/Notice/Notice";
 import MomentsNotice from "@/views/Notice/MomentsNotice";
 import RaiseNotice from "@/views/Notice/RaiseNotice";
-import Principle from "@/views/Principle";
+import Principle from "@/views/Principle/Principle";
 import OralMap from "@/views/OralMap";
 import OnlineSubmit from "@/views/OnlineSubmit/OnlineSubmit";
 import Submit from "@/views/OnlineSubmit/Submit";
@@ -31,6 +31,10 @@ import SearchResult from "@/views/MainPage/SearchResult";
 import ManageRead from "@/views/Administrator/ManageRead";
 import ManageListen from "@/views/Administrator/ManageListen";
 import ManageWatch from "@/views/Administrator/ManageWatch";
+import PrincipleList from "@/views/Principle/PrincipleList";
+import ReadPrinciple from "@/views/Principle/ReadPrinciple";
+import ManagePrinciple from "@/views/Administrator/ManagePrinciple";
+import AddNotice from "@/views/Administrator/AddNotice";
 
 const routes = [
   {
@@ -107,6 +111,18 @@ const routes = [
         path: '/principle',
         name: 'Principle',
         component: Principle,
+        children: [
+          {
+            path: '/principleList',
+            name: 'PrincipleList',
+            component: PrincipleList,
+          },
+          {
+            path: '/readPrinciple',
+            name: 'ReadPrinciple',
+            component: ReadPrinciple,
+          }
+        ]
       },
       {
         path: '/knowledgePicture',
@@ -201,9 +217,19 @@ const routes = [
             component: ManageMomentsNotice,
           },
           {
+            path: '/managePrinciple',
+            name: 'ManagePrinciple',
+            component: ManagePrinciple,
+          },
+          {
             path: '/manageReadNotice',
             name: 'ManageReadNotice',
             component: ManageReadNotice,
+          },
+          {
+            path: '/addNotice',
+            name: 'AddNotice',
+            component: AddNotice,
           }
         ]
       }

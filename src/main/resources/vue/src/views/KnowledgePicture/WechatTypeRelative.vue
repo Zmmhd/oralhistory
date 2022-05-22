@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pic">
     <img style="width: 100%" src="@/assets/WechatTypeRelative.jpg" alt="">
   </div>
 </template>
@@ -11,5 +11,10 @@ export default {
 </script>
 
 <style scoped>
-
+.pic{
+  margin: 20px;
+  padding: 10px;
+  border: 2px #4682B4 solid;
+  border-radius: 30px;
+}
 </style>

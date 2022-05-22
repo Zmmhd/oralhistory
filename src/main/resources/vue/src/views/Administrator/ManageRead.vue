@@ -1,16 +1,31 @@
 <template>
   <div style="margin: 20px 75px;">
-    <div style="border-bottom: #f05053 dashed 1px;">
+    <div style="border-bottom: #4682B4 dashed 1px;">
       <el-button style="margin: 0 0 10px 10px;" @click="back" type="info">返回</el-button>
       <el-button style="margin: 0 10px 10px 10px;" @click="handleEdit" type="info">审核管理</el-button>
     </div>
-    <div style="margin: 20px; padding: 20px; border: 2px #e7ac94 solid; border-radius: 5px;">
+
+    <div style="margin: 10px;">
+      <div style="font-weight: bolder; margin-bottom: 10px;">当前筛选条件：</div>
+      <div style="margin: 2px 0;">标题：<span style="color :#494241;">{{ currentTitle }}</span></div>
+      <div style="margin: 2px 0;">时间：<span style="color :#494241;">{{ currentUptime }}</span></div>
+      <div style="margin: 2px 0;">省份：<span style="color :#494241;">{{ currentProvince }}</span></div>
+      <div style="margin: 2px 0;">主题：<span style="color :#494241;">{{ currentTheme }}</span></div>
+      <div style="margin: 2px 0;">简介：<span style="color :#494241;">{{ currentSynopsis }}</span></div>
+    </div>
+
+    <div style="margin: 20px; padding: 20px; border: 2px #4682B4 solid; border-radius: 5px;">
       <iframe :src=url frameborder="0" style="width: 100%; min-height: 250vh;"></iframe>
     </div>
   </div>
 
   <el-dialog v-model="dialogVisible" title="审核管理" width="30%">
     <el-form :model="form" label-width="120px">
+      <el-form-item label="资源类型">
+        <el-radio v-model="form.type" :label="1" disabled>文章</el-radio>
+        <el-radio v-model="form.type" :label="2" disabled>视频</el-radio>
+        <el-radio v-model="form.type" :label="3" disabled>音频</el-radio>
+      </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="form.title" style="width: 80%;" readonly/>
       </el-form-item>
@@ -54,6 +69,12 @@ export default {
       currentId: sessionStorage.getItem("currentId"),
       url: baseUrl.BASE_URL + sessionStorage.getItem("currentUrl"),
 
+      currentTitle: sessionStorage.getItem("currentTitle"),
+      currentSynopsis: sessionStorage.getItem("currentSynopsis"),
+      currentUptime: sessionStorage.getItem("currentUptime"),
+      currentProvince: sessionStorage.getItem("currentProvince"),
+      currentTheme: sessionStorage.getItem("currentTheme"),
+
       dialogVisible: false,
       form: {}
     }
@@ -68,6 +89,7 @@ export default {
       this.form.synopsis = sessionStorage.getItem("currentSynopsis");
       this.form.uptime = sessionStorage.getItem("currentUptime");
       this.form.status = sessionStorage.getItem("currentStatus");
+      this.form.type = 1;
       this.dialogVisible = true;
     },
     save() {
