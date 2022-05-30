@@ -24,7 +24,7 @@ public class NoticeController {
     private final NoticeMapper noticeMapper;
 
     @PostMapping("/add")
-    public ResponseEntity addNotice(@RequestParam Notice notice) {
+    public ResponseEntity addNotice(@RequestBody Notice notice) {
         try {
             notice.setUptime(LocalDate.now());
             int insert = noticeMapper.insert(notice);
