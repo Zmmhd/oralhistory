@@ -174,7 +174,7 @@ export default {
             type: "video/mp4",
             //url地址
             // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-            src: baseUrl.BASE_URL + "1.mp4"
+            src: baseUrl.BASE_URL + "mainPage.mp4"
           },
         ],
         //你的封面地址
