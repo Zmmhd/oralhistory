@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class NoticeController {
     @PostMapping("/add")
     public ResponseEntity addNotice(@RequestParam Notice notice) {
         try {
+            notice.setUptime(LocalDate.now());
             int insert = noticeMapper.insert(notice);
             if (insert == 0) {
                 return RespondResult.error("失败", 400);

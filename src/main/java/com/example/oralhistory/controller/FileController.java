@@ -40,6 +40,22 @@ public class FileController {
         return RespondResult.success(url);
     }
 
+    @RequestMapping("/uploadnoticefile")
+    public ResponseEntity uploadNoticeFile(@RequestParam MultipartFile file,
+                                           HttpServletRequest request){
+        //设置文件上传保存文件路径：保存在项目运行目录下的uploadFile文件夹
+        String savepath = request.getSession().getServletContext().getRealPath("/uploadFile/notice/");
 
+
+        String url = null;
+        try {
+            url = FileUtils.saveFile(savepath, file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return RespondResult.error("失败", 400);
+        }
+
+        return RespondResult.success(url);
+    }
 
 }
