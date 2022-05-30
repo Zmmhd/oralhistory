@@ -16,48 +16,60 @@
           <div class="card" @click="getResourceById(78)">
             <div class="card-image"><img src="@/assets/Mpic/78p.png" alt=""/></div>
             <div class="card-info">
-              <el-tag>口述历史</el-tag>
               <p>“人离不开盐，我不舍晒盐”</p>
+            </div>
+            <div class="explainer">
+              口述者:史奇刚
             </div>
           </div>
 
           <div class="card" @click="getResourceById(79)">
             <div class="card-image"><img src="@/assets/Mpic/79p.png" alt=""/></div>
             <div class="card-info">
-              <el-tag>口述历史</el-tag>
               <p>把半山泥猫一代代传下去</p>
+            </div>
+            <div class="explainer">
+              口述者:倪爱仁
             </div>
           </div>
 
           <div class="card" @click="getResourceById(84)">
             <div class="card-image"><img src="@/assets/Mpic/84p.png" alt=""/></div>
             <div class="card-info">
-              <el-tag>口述历史</el-tag>
               <p>我的“金银彩绣”梦</p>
+            </div>
+            <div class="explainer">
+              口述者:裘群珠
             </div>
           </div>
 
           <div class="card" @click="getResourceById(87)">
             <div class="card-image"><img src="@/assets/Mpic/87p.png" alt=""/></div>
             <div class="card-info">
-              <el-tag>口述历史</el-tag>
               <p>一针一线总关情</p>
+            </div>
+            <div class="explainer">
+              口述者:蓝延兰
             </div>
           </div>
 
           <div class="card" @click="getResourceById(88)">
             <div class="card-image"><img src="@/assets/Mpic/88p.png" alt=""/></div>
             <div class="card-info">
-              <el-tag>口述历史</el-tag>
               <p>珠落玉盘声声悦</p>
+            </div>
+            <div class="explainer">
+              口述者:朱大祯
             </div>
           </div>
 
           <div class="card" @click="getResourceById(107)">
             <div class="card-image"><img src="@/assets/Mpic/107p.png" alt=""/></div>
             <div class="card-info">
-              <el-tag>口述历史</el-tag>
               <p>“老虎笙”的前世今生</p>
+            </div>
+            <div class="explainer">
+              口述者:杨家旭
             </div>
           </div>
         </div>
@@ -72,8 +84,12 @@
         <div class="video" @click="getResourceById(117)"><div class="video-id">4</div>【视频】口述·永远跟党走（谷凤宝）</div>
         <div class="video" @click="getResourceById(127)"><div class="video-id">5</div>【视频】小账本里写家国</div>
         <div class="video" @click="getResourceById(135)"><div class="video-id">6</div>【视频】陕西民歌档案之紫阳民歌</div>
-        <div class="video" @click="getResourceById(26)"><div class="video-id">7</div>【音频】纪念抗美援朝70周年‖一起聆听志愿军老兵的故事</div>
-        <div class="video" @click="getResourceById(28)"><div class="video-id">8</div>【音频】“妙手回春”连云港一代名中医朱少亭</div>
+        <div class="video" @click="getResourceById(9)"><div class="video-id">7</div>【视频】口述朝阳·叶如陵</div>
+        <div class="video" @click="getResourceById(140)"><div class="video-id">8</div>【视频】车牌尾号5205的车主，谢谢你</div>
+        <div class="video" @click="getResourceById(125)"><div class="video-id">9</div>【视频】集体一等功获得者赵壁荣</div>
+        <div class="video" @click="getResourceById(55)"><div class="video-id">10</div>【视频】红色档案·云南中共党员口述历史（黄洛峰）</div>
+        <div class="video" @click="getResourceById(26)"><div class="video-id">11</div>【音频】纪念抗美援朝70周年‖一起聆听志愿军老兵的故事</div>
+        <div class="video" @click="getResourceById(28)"><div class="video-id">12</div>【音频】“妙手回春”连云港一代名中医朱少亭</div>
       </div>
     </div>
 
@@ -158,7 +174,7 @@ export default {
             type: "video/mp4",
             //url地址
             // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-            src: baseUrl.BASE_URL + "1.mp4"
+            src: baseUrl.BASE_URL + "mainPage.mp4"
           },
         ],
         //你的封面地址
@@ -281,9 +297,9 @@ img {
 
 .card {
   background-color: #fff;
-  max-width: 250px;
-  width: 250px;
-  height: 80px;
+  max-width: 150px;
+  width: 150px;
+  height: 200px;
   margin: 10px 20px 10px;
   padding: 10px;
   box-shadow: 0 0 2px #ccc;
@@ -291,7 +307,9 @@ img {
   /* 超出盒子的部分遮起来 */
   overflow: hidden;
   display: flex;
-  align-content: center;
+  /*align-content: center;*/
+  justify-content: center;
+  flex-direction: column;
   cursor: pointer;
   user-select: none;
   transition: all 0.2s;
@@ -305,10 +323,11 @@ img {
 
 .card-image {
   background: #ADA996;
-  width: 40%;
-  margin-right: 10px;
-  display: flex;
-  align-content: center;
+  width: 100%;
+  height: 60%;
+  /*margin-right: 10px;*/
+  /*display: flex;*/
+  /*align-content: center;*/
 }
 
 .card-image img {
@@ -319,7 +338,10 @@ img {
 }
 
 .card-info{
-  width: 60%;
+  /*width: 60%;*/
+  height: 30%;
+  border-bottom: #ccc dashed 1px;
+  margin-bottom: 2px;
 }
 
 .card-info p {
@@ -330,6 +352,16 @@ img {
 .card-content{
   display: flex;
   flex-wrap: wrap;
+}
+
+.explainer{
+  height: 10%;
+  text-align: center;
+  font-size: x-small;
+  color: #fff;
+  background-color: #4682B4;
+  border-radius: 50px;
+  margin-top: 2px;
 }
 
 .video{
