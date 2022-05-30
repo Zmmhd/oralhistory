@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>oralhistory</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>oralhistory</name>
     <description>www.oralhistory.com project for Spring Boot</description>
 

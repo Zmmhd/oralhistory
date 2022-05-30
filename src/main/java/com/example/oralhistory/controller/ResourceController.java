@@ -97,6 +97,9 @@ public class ResourceController {
             List<String> targets = new ArrayList<>();
 
             for (Resource resource : resources) {
+                if(resource == null) {
+                    continue;
+                }
                 targets.add("province".equals(target) ? resource.getProvince() : resource.getTheme());
             }
 
