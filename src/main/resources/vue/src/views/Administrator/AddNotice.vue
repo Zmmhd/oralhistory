@@ -98,7 +98,7 @@ export default {
       console.log("正在上传。。。")
       const formData = new FormData()
       formData.append('file', params.file)
-      request.post("/uploadfile", formData).then(res => {
+      request.post("/uploadnoticefile", formData).then(res => {
         console.log(res);
         this.currentUrl = res.data;
         let notice = {
